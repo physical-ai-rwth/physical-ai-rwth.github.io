@@ -340,6 +340,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--only", help="slug to regenerate (default: all)")
     ap.add_argument("--quality", type=int, default=84)
+    ap.add_argument("--force", action="store_true",
+                    help="overwrite existing files (they may be real photographs)")
     args = ap.parse_args()
 
     os.makedirs(OUT, exist_ok=True)
@@ -350,8 +352,13 @@ def main():
         return 1
 
     for slug, fn, seed in todo:
-        img = fn(seed)
         path = os.path.join(OUT, slug + ".jpg")
+        # These filenames now hold real lab photography. Generated placeholder
+        # art must never silently replace it.
+        if os.path.exists(path) and not args.force:
+            print(f"  {slug:<26} exists — skipped (use --force to overwrite)")
+            continue
+        img = fn(seed)
         img.save(path, quality=args.quality, optimize=True, progressive=True)
         print(f"  {slug:<26} {os.path.getsize(path) // 1024:>4} KB")
     return 0
