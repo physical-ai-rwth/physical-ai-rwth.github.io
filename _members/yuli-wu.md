@@ -4,10 +4,10 @@ short_name: "Yuli Wu"
 order: 2
 type: lead
 display_types: [lead, member]
-role: "Group Leader — Physical AI Lab"
-affiliation: "Chair of Imaging and Computer Vision, RWTH Aachen University"
-bio: "Generalist robots for real-world long-horizon tasks."
-email: "robot@lfb.rwth-aachen.de"
+role: "Group Leader"
+affiliation: "Physical AI Lab, RWTH Aachen University"
+bio: "We develop generalist robots for real-world long-horizon tasks."
+email: "yuli.wu@lfb.rwth-aachen.de"
 author_id: "yuli-wu"
 cv_pdf: "/assets/cv/yuli-wu.pdf"
 cv:
@@ -20,28 +20,27 @@ cv:
   - period: "Feb 2026 – May 2026"
     title: "Visiting Scholar"
     org: "School of Biomedical Engineering, University of Sydney"
+  - period: "Dec 2021"
+    title: "Dr.-Ing."
+    org: "RWTH Aachen University"
   - period: "Jul 2021 – Dec 2025"
     title: "Research Scientist"
     org: "Chair of Imaging and Computer Vision, RWTH Aachen University"
   - period: "2018 – 2021"
-    title: "M.Sc. Electrical Engineering"
+    title: "M.Sc."
     org: "RWTH Aachen University"
-    note: "Information Technology and Computer Engineering"
+    note: "Electrical Engineering, Information Technology and Computer Engineering"
   - period: "2015 – 2018"
-    title: "B.Sc. Electrical Engineering"
+    title: "B.Sc."
     org: "RWTH Aachen University"
-    note: "Information Technology and Computer Engineering"
+    note: " Electrical Engineering, Information Technology and Computer Engineering"
 # Profile links — all optional. Delete any line you do not want.
 # Known keys fill in the label automatically; add `label:` for anything else.
 links:
   - key: scholar
-    url: "https://scholar.google.com/citations?user=[ID]"
-  - key: orcid
-    url: "https://orcid.org/[ID]"
+    url: "https://scholar.google.com/citations?user=qlun0AgAAAAJ&hl=en"
   - key: linkedin
-    url: "https://www.linkedin.com/in/[handle]"
-  - key: github
-    url: "https://github.com/[handle]"
+    url: "https://www.linkedin.com/in/wuyuli"
 image: "/assets/images/team/placeholder-person.svg"
 image_alt: ""
 ---

@@ -55,10 +55,11 @@ it before you publicise the site:
 
 **Two portrait sources are inadequate:**
 
-- **Prof. Schulz's photo is a 200x200 web thumbnail.** It is in place, but keeps its
-  original blue backdrop: keying that out of so small a JPEG leaves visible artefacts
-  around the head. Ask the institute or the photographer for the full-resolution
-  original, then re-run the tool without `--keep-bg` to get the gray treatment.
+- **Prof. Schulz's photo is a 200x200 web thumbnail.** It is in place via `--fit`, which
+  shows the whole photo and extends the backdrop sideways rather than cropping his head.
+  It keeps the original blue: keying that out of so small a JPEG leaves visible artefacts.
+  Ask the institute or the photographer for the full-resolution original, then re-run
+  without `--fit --keep-bg` for the standard gray treatment.
 - **There is no portrait of Yuli Wu.** The file in `~/Downloads/DrYuliWu.jpg` is a
   screenshot of the institute contact page, not a photograph.
 

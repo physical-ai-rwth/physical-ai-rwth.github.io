@@ -108,9 +108,24 @@ def gradient(w, h, face_cx=None, face_cy=None):
     return np.clip(out, 0, 255).astype(np.uint8)
 
 
-def plan(shape, face, out_w, out_h, face_frac, face_y):
+def plan(shape, face, out_w, out_h, face_frac, face_y, fit=False):
     """Work out scale and crop offset once, so every frame gets the same one."""
     H, W = shape[:2]
+
+    if fit:
+        # Show the whole frame: match the height and let the sides fall short.
+        # apply_plan fills the gap by extending the photo's own background, which
+        # keeps a head intact that a cover-crop would slice off.
+        scale = out_h / H
+        ox = int(round((W * scale - out_w) / 2))
+        oy = 0
+        nf = None
+        if face is not None:
+            x, y, fw, fh = face
+            nf = (int(x * scale) - ox, int(y * scale) - oy,
+                  int(fw * scale), int(fh * scale))
+        return scale, ox, oy, nf
+
     if face is None:
         # No face: cover-crop the centre, which is the safe default
         scale = max(out_w / W, out_h / H)
@@ -142,7 +157,7 @@ def plan(shape, face, out_w, out_h, face_frac, face_y):
     return scale, ox, oy, new_face
 
 
-def apply_plan(bgr, scale, ox, oy, out_w, out_h):
+def apply_plan(bgr, scale, ox, oy, out_w, out_h, extend=False):
     """Resize and crop one frame using a precomputed plan."""
     H, W = bgr.shape[:2]
     new_w, new_h = max(1, int(round(W * scale))), max(1, int(round(H * scale)))
@@ -159,6 +174,44 @@ def apply_plan(bgr, scale, ox, oy, out_w, out_h):
     dx0, dy0 = sx0 - ox, sy0 - oy
     canvas[dy0:dy0 + (sy1 - sy0), dx0:dx0 + (sx1 - sx0)] = resized[sy0:sy1, sx0:sx1]
     valid[dy0:dy0 + (sy1 - sy0), dx0:dx0 + (sx1 - sx0)] = 1
+
+    if extend:
+        # Stretch the outermost column outward. Replicating a column rather than
+        # filling with a flat colour carries any vertical gradient in the
+        # backdrop straight through, so the join is invisible.
+        x_lo, x_hi = dx0, dx0 + (sx1 - sx0) - 1
+        if x_lo > 0:
+            canvas[:, :x_lo] = canvas[:, x_lo:x_lo + 1]
+        if x_hi < out_w - 1:
+            canvas[:, x_hi + 1:] = canvas[:, x_hi:x_hi + 1]
+        y_lo, y_hi = dy0, dy0 + (sy1 - sy0) - 1
+        if y_lo > 0:
+            canvas[:y_lo, :] = canvas[y_lo:y_lo + 1, :]
+        if y_hi < out_h - 1:
+            canvas[y_hi + 1:, :] = canvas[y_hi:y_hi + 1, :]
+
+        # A replicated column repeats whatever detail sat at that x — a shadow
+        # edge, say — as a visible band. Blur the extension and ramp it in from
+        # the seam so the transition cannot be picked out.
+        if x_lo > 0 or x_hi < out_w - 1:
+            blurred = cv2.GaussianBlur(canvas, (0, 0), sigmaX=max(6, out_w / 26), sigmaY=2)
+            ramp = np.zeros((out_w,), np.float32)
+            feather = max(8, int(out_w * 0.05))
+            if x_lo > 0:
+                ramp[:x_lo] = 1.0
+                lo = max(0, x_lo - feather)
+                ramp[lo:x_lo] = np.linspace(0, 1, x_lo - lo)[::-1] * 0 + \
+                                np.linspace(1, 0, x_lo - lo)[::-1]
+            if x_hi < out_w - 1:
+                ramp[x_hi + 1:] = 1.0
+                hi = min(out_w, x_hi + 1 + feather)
+                ramp[x_hi + 1:hi] = np.linspace(0, 1, hi - (x_hi + 1))
+            a = ramp[None, :, None]
+            canvas = (canvas.astype(np.float32) * (1 - a) +
+                      blurred.astype(np.float32) * a).astype(np.uint8)
+
+        valid[:] = 1        # the extension is real background, not padding
+
     return canvas, valid
 
 
@@ -226,7 +279,7 @@ def segment(bgr, face, valid, iters=5):
 
 
 def process(src, dst, out_w, out_h, face_frac, face_y, keep_bg, quality,
-            debug_mask=False, animate=True, max_frames=120):
+            debug_mask=False, animate=True, max_frames=120, fit=False):
     try:
         frames, durations, animated = load_frames(src)
     except Exception as e:
@@ -248,14 +301,14 @@ def process(src, dst, out_w, out_h, face_frac, face_y, keep_bg, quality,
     # for every frame — per-frame segmentation would flicker badly.
     ref = frames[0]
     face = detect_face(ref)
-    scale, ox, oy, new_face = plan(ref.shape, face, out_w, out_h, face_frac, face_y)
+    scale, ox, oy, new_face = plan(ref.shape, face, out_w, out_h, face_frac, face_y, fit)
     if scale > 1.6:
         sh, sw = ref.shape[:2]
         print(f"    source is {sw}x{sh}; filling {out_w}x{out_h} needs {scale:.1f}x "
               f"upscaling and will look soft. Use a larger original, or --width "
               f"{int(out_w / scale * 1.6 // 10 * 10)}.", file=sys.stderr)
 
-    ref_placed, valid = apply_plan(ref, scale, ox, oy, out_w, out_h)
+    ref_placed, valid = apply_plan(ref, scale, ox, oy, out_w, out_h, fit)
     cx = None if new_face is None else new_face[0] + new_face[2] / 2
     cy = None if new_face is None else new_face[1] + new_face[3] / 2
     bg = gradient(out_w, out_h, cx, cy)
@@ -270,7 +323,7 @@ def process(src, dst, out_w, out_h, face_frac, face_y, keep_bg, quality,
 
     out_frames = []
     for fr in frames:
-        placed, v = apply_plan(fr, scale, ox, oy, out_w, out_h)
+        placed, v = apply_plan(fr, scale, ox, oy, out_w, out_h, fit)
         if alpha is None:
             comp = placed.copy()
             comp[v == 0] = bg[v == 0]
@@ -322,6 +375,9 @@ def main():
                     help="face height as a fraction of image height (default 0.30)")
     ap.add_argument("--face-y", type=float, default=0.40,
                     help="vertical position of the face centre, 0-1 (default 0.40)")
+    ap.add_argument("--fit", action="store_true",
+                    help="show the whole photo and extend its background sideways to "
+                         "reach the ratio, instead of cropping to fill")
     ap.add_argument("--keep-bg", action="store_true",
                     help="crop and position only; do not replace the background")
     ap.add_argument("--quality", type=int, default=88, help="JPEG quality (default 88)")
@@ -353,7 +409,7 @@ def main():
             dst = os.path.join(args.out_dir, stem + out_ext)
             ok += process(f, dst, out_w, out_h, args.face_frac, args.face_y,
                           args.keep_bg, args.quality, args.debug_mask,
-                          not args.no_animate, args.max_frames)
+                          not args.no_animate, args.max_frames, args.fit)
         print(f"{ok}/{len(files)} converted")
         return 0 if ok else 1
 
@@ -362,7 +418,7 @@ def main():
     return 0 if process(args.input, args.out, out_w, out_h, args.face_frac,
                         args.face_y, args.keep_bg, args.quality,
                         args.debug_mask, not args.no_animate,
-                        args.max_frames) else 1
+                        args.max_frames, args.fit) else 1
 
 
 if __name__ == "__main__":

@@ -33,6 +33,7 @@ team cards and member portraits expect, so nothing gets re-cropped by CSS.
 | `--width` | `1200` | Output width in px; height follows the ratio. |
 | `--face-frac` | `0.30` | Head height as a fraction of image height. Raise for a tighter crop. |
 | `--face-y` | `0.40` | Where the face centre sits vertically, 0–1. |
+| `--fit` | off | Show the whole photo and extend its background sideways to reach the ratio, instead of cropping to fill. |
 | `--keep-bg` | off | Crop and position only; leave the background alone. |
 | `--debug-mask` | off | Also writes the cut-out matte next to the output. |
 | `--quality` | `88` | JPEG quality. |
@@ -73,6 +74,16 @@ In batch mode, `.gif` sources stay `.gif` so animation survives; everything else
 
 Animation also works nicely for the hover image: point `image:` at a still and
 `image_alt:` at the GIF, and the card animates only on hover.
+
+### When the source is the wrong shape
+
+A square or portrait-orientation photo cannot fill a 4:3 frame without losing the top of
+the head. `--fit` avoids that: it matches the height, centres the photo, and extends the
+backdrop outward by replicating the edge columns — then blurs and feathers the extension
+so the seam cannot be picked out. Replicating a column rather than filling with a flat
+colour carries any vertical gradient in the backdrop straight through.
+
+Useful for studio headshots, which are usually framed square or tall.
 
 ### Honest limits
 
