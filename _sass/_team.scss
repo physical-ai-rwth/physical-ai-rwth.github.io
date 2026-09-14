@@ -277,12 +277,20 @@
   border: 1px solid $border;
   color: $text-muted;
 
-  &.tag-leader { border-color: $accent; color: $accent; background: $accent-alpha; }
-  &.tag-head   { border-color: #7C3AED; color: #7C3AED; background: rgba(124,58,237,0.08); }
-  &.tag-member { }
+  // One hue per category, chosen for separation rather than meaning.
+  &.tag-head      { border-color: #7C3AED; color: #7C3AED; background: rgba(124,58,237,0.08); }
+  &.tag-lead      { border-color: $accent;  color: $accent;  background: $accent-alpha; }
+  &.tag-member    { border-color: #0E7490; color: #0E7490; background: rgba(14,116,144,0.08); }
   &.tag-associate { border-color: #B45309; color: #B45309; background: rgba(180,83,9,0.08); }
-  &.tag-student   { border-color: #0F766E; color: #0F766E; background: rgba(15,118,110,0.08); }
-  &.tag-robot  { border-color: #059669; color: #059669; background: rgba(5,150,105,0.08); }
+  &.tag-student   { border-color: #15803D; color: #15803D; background: rgba(21,128,61,0.08); }
+
+  // Robots are filled rather than outlined — a different treatment, not just a
+  // different hue, so a machine never reads as another class of person.
+  &.tag-robot {
+    border-color: $bg-dark;
+    background: $bg-dark;
+    color: $text-light;
+  }
 }
 
 // Section for team content

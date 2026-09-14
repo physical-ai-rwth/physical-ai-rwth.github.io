@@ -1,0 +1,38 @@
+---
+name: "OpenArm Beta"
+short_name: "Beta"
+order: 11
+type: robot
+display_types: [robot]
+role: "Bimanual Manipulator"
+description: "Open-source bimanual arm built for physical AI research in contact-rich settings. Compliant, backdrivable joints make it safe to work alongside and well suited to learning from physical interaction."
+specs:
+  - label: "Unit"
+    value: "Beta"
+  - label: "Configuration"
+    value: "Bimanual"
+  - label: "Joints"
+    value: "Backdrivable"
+  - label: "Bus"
+    value: "CAN-FD"
+  - label: "Source"
+    value: "Open"
+links:
+  - label: "openarm.dev"
+    url: "https://openarm.dev"
+image: "/assets/images/robots/openarm.svg"
+image_alt: "/assets/images/robots/openarm-action.svg"
+---
+
+Usually paired with Alpha for bimanual work.
+
+OpenArm is an open-source bimanual robot arm from [Enactic](https://openarm.dev), built
+for physical AI research and deployment in contact-rich environments. CAD, firmware,
+control code and simulation tooling are all openly available.
+
+Compliant, backdrivable joints make it safe for human-adjacent operation and well suited
+to teleoperation with bilateral force feedback — which in turn makes it a practical source
+of demonstration data for imitation learning.
+
+*Exact DOF, payload and reach are still to be confirmed: the figures published on the
+vendor's landing page were placeholders at the time of writing.*

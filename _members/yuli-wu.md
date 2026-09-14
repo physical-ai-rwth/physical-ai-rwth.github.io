@@ -2,8 +2,8 @@
 name: "Dr.-Ing. Yuli Wu"
 short_name: "Yuli Wu"
 order: 2
-type: leader
-display_types: [leader, member]
+type: lead
+display_types: [lead, member]
 role: "Group Leader — Physical AI Lab"
 affiliation: "Chair of Imaging and Computer Vision, RWTH Aachen University"
 bio: "Leads the Physical AI Lab, building generalist robots that autonomously solve real-world long-horizon tasks through learned perception, reasoning and control."

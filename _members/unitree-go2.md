@@ -1,7 +1,7 @@
 ---
 name: "Unitree Go2"
 short_name: "Go2"
-order: 11
+order: 13
 type: robot
 display_types: [robot]
 role: "Quadruped"
@@ -13,8 +13,8 @@ specs:
     value: "4 × 3 joints"
   - label: "Maker"
     value: "Unitree"
-image: "/assets/images/robots/placeholder-robot.svg"
-image_alt: "/assets/images/robots/placeholder-robot-action.svg"
+image: "/assets/images/robots/unitree-go2.svg"
+image_alt: "/assets/images/robots/unitree-go2-action.svg"
 ---
 
 A quadruped platform from Unitree Robotics, used for locomotion and mobile manipulation

@@ -14,7 +14,7 @@ dark_header: true
       <a href="{{ "/team/" | relative_url }}" class="member-back">Team</a>
 
       <p class="member-eyebrow">
-        {% if page.type == "leader" %}Group Leader
+        {% if page.type == "lead" %}Group Leader
         {% elsif page.type == "head" %}Head of Institute
         {% elsif is_machine %}{{ page.role }}
         {% elsif page.type == "associate" %}Associate Member
