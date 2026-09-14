@@ -12,12 +12,18 @@
   const DARK_BANNERS = '.hero, .page-header, .member-hero, .topic-hero';
   const darkBanner = document.querySelector(DARK_BANNERS);
 
+  // Flip to the solid header while the dark banner still covers the nav. Waiting
+  // until its bottom edge reaches the nav means light body text slides under a
+  // still-transparent header for a moment, and the logo and links become
+  // unreadable against it.
+  const EARLY_SWITCH = 90;
+
   function updateNav() {
     if (!header) return;
     // Measured, not hardcoded — $nav-height lives in SCSS and has changed before
     const navHeight = header.offsetHeight || 80;
     const overDark = darkBanner
-      ? darkBanner.getBoundingClientRect().bottom > navHeight
+      ? darkBanner.getBoundingClientRect().bottom > navHeight + EARLY_SWITCH
       : false;
 
     header.classList.toggle('on-dark', overDark);

@@ -3,7 +3,9 @@
   top: 0; left: 0; right: 0;
   z-index: 100;
   height: $nav-height;
-  transition: background $t, border-color $t, box-shadow $t;
+  // Deliberately quicker than the site-wide $t: a header that fades slowly
+  // spends that time half-legible over whatever is scrolling past behind it.
+  transition: background 0.18s $ease-out, border-color 0.18s $ease-out;
 
   // Transparent over hero
   background: transparent;
@@ -55,7 +57,7 @@
 .nav-logo-img {
   height: 28px;
   width: auto;
-  transition: opacity $t;
+  transition: opacity 0.18s $ease-out;   // in step with the header background
 }
 
 // The full lockup carries text, so it needs a little more height to stay legible
