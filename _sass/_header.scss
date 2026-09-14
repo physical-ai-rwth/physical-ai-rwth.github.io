@@ -11,11 +11,27 @@
   background: transparent;
   border-bottom: 1px solid transparent;
 
+  // A dark scrim that fades out downward rather than a solid bar — far less
+  // dominant, and the page still shows through at the lower edge.
+  //
+  // No backdrop-filter here on purpose: the blur covers the whole element box,
+  // so over a background fading to transparent it leaves a hard horizontal cut
+  // where the blur stops.
   &.scrolled {
-    background: rgba($bg, 0.95);
-    border-bottom-color: $border;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: linear-gradient(
+      to bottom,
+      rgba($bg-dark, 0.97) 0%,
+      rgba($bg-dark, 0.94) 52%,
+      rgba($bg-dark, 0.68) 82%,
+      rgba($bg-dark, 0) 100%
+    );
+    border-bottom-color: transparent;
+
+    // Dark in this state too, so the nav stays light-on-dark throughout
+    .nav-link { color: $text-light; }
+    .nav-logo-blue { opacity: 0; }
+    .nav-logo-white { opacity: 1; }
+    .nav-toggle span { background: $text-light; }
   }
 
   &.on-dark {
@@ -25,16 +41,16 @@
     .nav-toggle span { background: $text-light; }
   }
 
-  // With the menu open the header must be solid and dark-on-light, whatever
-  // the scroll state says — it sits directly above the open panel.
+  // Menu open: solid dark rather than a fading scrim, so the bar reads as one
+  // piece sitting above the light panel instead of bleeding into it.
   &.menu-open {
-    background: rgba($bg, 0.98);
-    border-bottom-color: $border;
+    background: rgba($bg-dark, 0.99);
+    border-bottom-color: rgba($text-light, 0.10);
 
-    .nav-link { color: $text; }
-    .nav-logo-blue { opacity: 1; }
-    .nav-logo-white { opacity: 0; }
-    .nav-toggle span { background: $text; }
+    .nav-link { color: $text-light; }
+    .nav-logo-blue { opacity: 0; }
+    .nav-logo-white { opacity: 1; }
+    .nav-toggle span { background: $text-light; }
   }
 }
 
