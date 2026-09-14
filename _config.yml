@@ -15,11 +15,14 @@ address: Kopernikusstr. 16, 52074 Aachen, Germany
 # Hero background video. Set youtube_id to embed a YouTube clip, or drop a file
 # at assets/video/hero.mp4 to self-host. A local file always wins if present.
 hero_video:
+  # TEMPORARY placeholder. This is third-party footage, and a YouTube embed also
+  # plays the video owner's ads, which no embed parameter disables. Drop a file
+  # at assets/video/hero.mp4 and it takes over automatically; then clear this.
   youtube_id: "aWLz0HYobd8"
   title: "Robot training footage"
-  # Shown bottom-right over the video. Only appears for the YouTube embed —
-  # it disappears by itself once you self-host your own hero.mp4.
-  # Set to "" to hide it entirely.
+  # Shown bottom-right over whichever source is playing, self-hosted included,
+  # so CC-BY footage can carry the attribution its licence requires.
+  # Set to "" for footage of your own, which needs no credit.
   credit: "Third-party footage"
 
 markdown: kramdown

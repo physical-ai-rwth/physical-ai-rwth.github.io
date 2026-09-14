@@ -6,7 +6,7 @@ type: head
 display_types: [head, member]
 role: "Head of Institute"
 affiliation: "Chair of Imaging and Computer Vision, RWTH Aachen University"
-bio: "Medical imaging, PET/MRI and image reconstruction."
+quote: "[Quote from Prof. Schulz]"
 email: ""
 author_id: "volkmar-schulz"
 cv_pdf: "/assets/cv/volkmar-schulz.pdf"
@@ -52,8 +52,8 @@ image_alt: ""
 ---
 
 Professor Schulz heads the Chair of Imaging and Computer Vision within the Faculty of
-Electrical Engineering and Information Technology at RWTH Aachen University. The Physical
-AI Lab operates as a research group within the chair.
+Electrical Engineering and Information Technology at RWTH Aachen University. He oversees the
+Physical AI Lab, which operates as a research group within the chair.
 
 The chair's expertise in imaging and medical technology shapes one of the lab's research
 directions, where learned robotic autonomy meets clinical settings and the demands of

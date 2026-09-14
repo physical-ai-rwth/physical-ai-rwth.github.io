@@ -128,10 +128,15 @@ dark_header: true
           </div>
         {% endif %}
 
-        {% if page.description %}
+        {%- comment -%}
+          A person leads with their own words (`quote:`), set in italic and
+          wrapped in typographic quote marks. Robots have no voice, so they keep
+          the plain `description:` lede instead.
+        {%- endcomment -%}
+        {% if page.quote and page.quote != "" %}
+          <blockquote class="member-quote">&ldquo;{{ page.quote }}&rdquo;</blockquote>
+        {% elsif page.description %}
           <p class="member-lede">{{ page.description }}</p>
-        {% elsif page.bio %}
-          <p class="member-lede">{{ page.bio }}</p>
         {% endif %}
 
         <div class="member-prose">

@@ -179,6 +179,17 @@
   text-wrap: pretty;
 }
 
+// A member's own words. Weight 500 has a real Vollkorn italic cut, so this is a
+// true italic rather than a synthesised slant. The negative first-line indent
+// hangs the opening quote mark into the margin, keeping the text's left edge
+// flush with the prose beneath it.
+.member-quote {
+  @extend .member-lede;
+  margin: 0 0 1.75rem;
+  font-style: italic;
+  text-indent: -0.38em;
+}
+
 .member-prose {
   font-family: $font-sans;
   font-size: $fs-body;

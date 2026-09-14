@@ -78,7 +78,9 @@ two machines. Add people as they join — see *Adding a team member* below.
 
 Two things to verify:
 
-- **Prof. Schulz's bio** is my inference from the job description, which says only that he
+- **Prof. Schulz's quote** is an unfilled placeholder, `[Quote from Prof. Schulz]`, and
+  needs his actual words before launch. His prose paragraph is my inference from the job
+  description, which says only that he
   heads the chair. Confirm or replace.
 - **The machines list** covers only what the JD confirms (NEURA Gym, ~120 GPUs). Add your
   actual robot platforms with real model names and specs.
@@ -105,6 +107,16 @@ Two specifics: the `apply_subject:` values `PhysicalAI_HiWi_{LastName}` and
 `PhysicalAI_Thesis_{LastName}` are my extrapolation from the PhD convention in the JD, and
 neither position has a job description PDF. Drop one in `assets/jd/` and uncomment `pdf:`
 in that file to make the download button appear.
+
+Both pages now carry an `openings:` list with **two bracketed placeholder entries each**
+(`[Thesis topic title]`, `[HiWi role title]`). Replace the titles and summaries with real
+ones, set the right contact per topic, and add the PDFs at the paths listed. Delete any
+entry you do not need: the section disappears entirely when `openings:` is empty.
+
+**All four entries across both pages currently link to the PhD job description** as a
+stand-in, so a student clicking Download today gets a PhD JD. Replace `pdf:` in
+`_positions/thesis.md` and `_positions/hiwi.md` with the real per-topic PDFs before either
+page is publicised.
 
 ### 1.7 Set `url` and `baseurl` before deploying
 
@@ -270,7 +282,7 @@ type: member                    # leader | head | member | associate | robot
 display_types: [member]         # which filter tabs it appears under
 role: "Doctoral Researcher"
 affiliation: "Physical AI Lab, RWTH Aachen University"
-bio: "One or two sentences — card hover text and the page lede."
+quote: "A sentence in their own words."   # shown in quote marks, italic
 research: [World Models, Sim-to-Real]
 email: "jane.doe@lfb.rwth-aachen.de"
 image: "/assets/images/team/jane-doe.jpg"           # 4:3
@@ -300,7 +312,11 @@ Recognised `links` keys: `scholar`, `linkedin`, `github`, `orcid`, `arxiv`, `x`,
 else give your own `label:`.
 
 Robots use `type: robot`, and take `description:` plus a `specs:` list of label/value
-pairs instead of `bio:`.
+pairs instead of `quote:`. A robot's `description:` renders as a plain lede, without the
+quote marks and italics a person's `quote:` gets.
+
+`quote:` must be the person's actual words: it is presented to readers as something they
+said. Do not paraphrase a description into a quote.
 
 ---
 
@@ -459,10 +475,39 @@ facts:                                   # the "At a glance" table
     value: "Full-time"
 pdf: "/assets/jd/PostDoc_JD.pdf"         # optional; button hidden if file missing
 apply_subject: "PhysicalAI_PostDoc_{LastName}"
+
+openings_title: "Open topics"            # optional heading; defaults to "Open topics"
+openings:                                # optional; omit and nothing renders
+  - title: "Tactile manipulation"
+    summary: "One or two sentences on the topic."
+    contact: "Yuli Wu"                   # optional
+    email: "yuli.wu@lfb.rwth-aachen.de"  # optional; falls back to site.email
+    pdf: "/assets/jd/Thesis_Tactile.pdf" # optional; hidden until the file exists
 ---
 
 Markdown body — the detail on that page.
 ```
 
+`openings:` lists several advertised topics or roles under one position, each with its own
+summary, contact and PDF. `hiwi.md` and `thesis.md` use it; `phd.md` does not, since that
+page is a single opening.
+
+Three switches turn off parts of the shared layout, for a page where applications go to a
+named person per opening rather than through the generic address:
+
+| Front matter | Effect |
+|---|---|
+| `contact_email: ""` | hides the "Contact" block in the sidebar (defaults to `site.email`) |
+| `apply_subject: ""` | hides the subject-line callout and the "Apply by email" button |
+| no markdown body | the prose block is skipped entirely |
+| `initiative:` | adds a speculative-application block (`title`, `summary`, `contact`, `email`) |
+
+`thesis.md` and `hiwi.md` both use all four: each is a bare list plus an initiative block,
+with every contact going to a named person. `phd.md` uses none of them and renders the full
+layout. Note these are empty strings, not omissions. Leaving the
+key out falls back to the default, because Liquid's `default` filter treats `""` as absent.
+
 Job description PDFs live in `assets/jd/`. The download button renders only when the file
 actually exists, so a stale `pdf:` path fails silently rather than publishing a dead link.
+This applies per opening as well as to the page-level `pdf:`, so you can list a path before
+the PDF is written and the button appears by itself once you drop the file in.

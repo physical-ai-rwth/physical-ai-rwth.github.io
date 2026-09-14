@@ -13,8 +13,11 @@
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
-  gap: clamp(32px, 5vw, 80px);
+  // The brand column takes the slack, so Navigate and Contact sit together at
+  // the right rather than drifting toward the middle.
+  grid-template-columns: 1fr max-content max-content;
+  column-gap: clamp(36px, 4vw, 64px);
+  row-gap: 2.25rem;
   padding-bottom: 48px;
   border-bottom: 1px solid $border-dark;
   margin-bottom: 32px;

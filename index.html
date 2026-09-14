@@ -12,14 +12,15 @@ dark_header: true
       2. site.hero_video.youtube_id     — set in _config.yml
       3. neither                        — ambient gradient only
   {%- endcomment -%}
-  {% assign hero_video = site.static_files | where: "path", "/assets/video/hero.mp4" | first %}
+  {% assign hero_file = site.static_files | where: "path", "/assets/video/hero.mp4" | first %}
+  {% assign yt = site.hero_video.youtube_id | default: "" %}
+  {% assign credit = site.hero_video.credit | default: "" %}
 
-  {% if hero_video %}
+  {% if hero_file %}
     <video class="hero-video" autoplay muted loop playsinline preload="auto">
-      <source src="{{ hero_video.path | relative_url }}" type="video/mp4">
+      <source src="{{ hero_file.path | relative_url }}" type="video/mp4">
     </video>
-  {% elsif site.hero_video.youtube_id and site.hero_video.youtube_id != "" %}
-    {% assign yt = site.hero_video.youtube_id %}
+  {% elsif yt != "" %}
     <iframe
       class="hero-video-frame"
       src="https://www.youtube-nocookie.com/embed/{{ yt }}?autoplay=1&mute=1&loop=1&playlist={{ yt }}&controls=0&showinfo=0&modestbranding=1&playsinline=1&rel=0&disablekb=1&fs=0&iv_load_policy=3"
@@ -28,9 +29,18 @@ dark_header: true
       allow="autoplay; encrypted-media"
       tabindex="-1"
       aria-hidden="true"></iframe>
-    {% if site.hero_video.credit and site.hero_video.credit != "" %}
-      <p class="hero-credit">{{ site.hero_video.credit }}</p>
-    {% endif %}
+  {% endif %}
+
+  {%- comment -%}
+    Attribution belongs to whichever source is playing, self-hosted included:
+    a CC-BY clip still needs its credit when served from our own domain. It was
+    previously tied to the embed only, which would have silently dropped
+    attribution the moment a licensed file was self-hosted.
+  {%- endcomment -%}
+  {% assign has_video = false %}
+  {% if hero_file %}{% assign has_video = true %}{% elsif yt != "" %}{% assign has_video = true %}{% endif %}
+  {% if has_video and credit != "" %}
+    <p class="hero-credit">{{ credit }}</p>
   {% endif %}
 
   <div class="hero-overlay"></div>
@@ -82,10 +92,7 @@ dark_header: true
 <!-- ── Research pillars ───────────────────────────── -->
 <section class="section section-flush-top">
   <div class="container">
-    <div class="section-head reveal">
-      <p class="section-label">Research</p>
-      <a href="{{ "/research/" | relative_url }}" class="pillar-link">All research</a>
-    </div>
+    <p class="section-label reveal">Research</p>
 
     <div class="pillars-grid reveal reveal-delay-1">
       {% assign topics = site.research | sort: "order" %}

@@ -6,7 +6,7 @@ type: member
 display_types: [member]
 role: "Open Position"
 affiliation: "Physical AI Lab, RWTH Aachen University"
-bio: "We are recruiting doctoral researchers."
+quote: "We are recruiting doctoral researchers."
 research:
   - Open Call
 email: "robot@lfb.rwth-aachen.de"

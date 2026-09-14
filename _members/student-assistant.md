@@ -6,7 +6,7 @@ type: student
 display_types: [student]
 role: "Student Assistant"
 affiliation: "Physical AI Lab, RWTH Aachen University"
-bio: "HiWis and thesis students."
+quote: "[Quote from this member]"
 research:
   - Robot Learning
 email: ""

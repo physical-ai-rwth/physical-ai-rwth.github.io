@@ -166,8 +166,10 @@
   .member-card:hover & { opacity: 1; }
 }
 
-.overlay-bio {
+.overlay-quote {
   font-family: $font-sans;
+  // Roboto ships a real italic, so no faux slant here either
+  font-style: italic;
   font-size: 13px;
   line-height: 1.55;
   color: rgba($text-light, 0.75);

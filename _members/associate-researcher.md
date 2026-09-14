@@ -6,7 +6,7 @@ type: associate
 display_types: [associate]
 role: "Doctoral Researcher"
 affiliation: "RWTH Aachen University"
-bio: "Works with the group, supervised elsewhere."
+quote: "[Quote from this member]"
 research:
   - Robot Learning
 email: ""

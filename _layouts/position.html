@@ -49,23 +49,111 @@ dark_header: true
             {% endif %}
           {% endif %}
 
-          <div class="member-facts">
-            <p class="member-facts-title">Contact</p>
-            <a href="mailto:{{ site.email }}" class="member-contact-link">{{ site.email }}</a>
-          </div>
+          {%- comment -%}
+            Defaults to site.email. Set `contact_email: ""` on a page whose
+            openings each carry their own contact, so one generic address does
+            not sit above a list of specific ones.
+          {%- endcomment -%}
+          {% assign contact_mail = site.email %}
+          {% if page.contact_email %}{% assign contact_mail = page.contact_email %}{% endif %}
+          {% if contact_mail != "" %}
+            <div class="member-facts">
+              <p class="member-facts-title">Contact</p>
+              <a href="mailto:{{ contact_mail }}" class="member-contact-link">{{ contact_mail }}</a>
+            </div>
+          {% endif %}
         </aside>
 
         <div class="position-main">
-          <div class="topic-prose">
-            {{ content }}
-          </div>
+          {% assign body = content | strip %}
+          {% if body != "" %}
+            <div class="topic-prose">
+              {{ content }}
+            </div>
+          {% endif %}
 
-          {% assign subj = page.apply_subject | default: "PhysicalAI_Application" %}
-          <p class="callout"><code>{{ subj }}</code></p>
-          <p class="apply-note">Use this as the subject line of your email.</p>
+          {%- comment -%}
+            Individual openings listed under one position, each with its own
+            summary, contact and PDF. Omit `openings:` and nothing renders,
+            which is how the PhD page works. A PDF link appears only when the
+            file is actually present, so a path pointing at a missing file
+            degrades to no button rather than to a dead download.
+          {%- endcomment -%}
+          {% if page.openings and page.openings.size > 0 %}
+            <section class="openings">
+              <h2 class="member-section-title">{{ page.openings_title | default: "Open topics" }}</h2>
 
-          <a href="mailto:{{ site.email }}?subject={{ subj | url_encode }}"
-             class="btn btn-primary position-apply">Apply by email</a>
+              {% for o in page.openings %}
+                <article class="opening-item">
+                  <h3 class="opening-item-title">{{ o.title }}</h3>
+
+                  {% if o.summary and o.summary != "" %}
+                    <p class="opening-item-summary">{{ o.summary }}</p>
+                  {% endif %}
+
+                  <div class="opening-item-meta">
+                    {% assign mail = o.email | default: site.email %}
+                    <span class="opening-contact">
+                      {% if o.contact and o.contact != "" %}
+                        <span class="opening-contact-name">{{ o.contact }}</span>
+                      {% endif %}
+                      <a href="mailto:{{ mail }}">{{ mail }}</a>
+                    </span>
+
+                    {% if o.pdf and o.pdf != "" %}
+                      {% assign jd_file = site.static_files | where: "path", o.pdf | first %}
+                      {% if jd_file %}
+                        <a href="{{ jd_file.path | relative_url }}" class="cv-button"
+                           target="_blank" rel="noopener">
+                          Download
+                          <span class="cv-meta">PDF</span>
+                        </a>
+                      {% endif %}
+                    {% endif %}
+                  </div>
+                </article>
+              {% endfor %}
+            </section>
+          {% endif %}
+
+          {%- comment -%}
+            Speculative applications, for someone whose interest does not match
+            a listed topic. Omit `initiative:` and nothing renders.
+          {%- endcomment -%}
+          {% if page.initiative %}
+            <section class="openings">
+              <h2 class="member-section-title">{{ page.initiative.title | default: "Initiative application" }}</h2>
+              <article class="opening-item">
+                {% if page.initiative.summary and page.initiative.summary != "" %}
+                  <p class="opening-item-summary">{{ page.initiative.summary }}</p>
+                {% endif %}
+                <div class="opening-item-meta">
+                  {% assign i_mail = page.initiative.email | default: site.email %}
+                  <span class="opening-contact">
+                    {% if page.initiative.contact and page.initiative.contact != "" %}
+                      <span class="opening-contact-name">{{ page.initiative.contact }}</span>
+                    {% endif %}
+                    <a href="mailto:{{ i_mail }}">{{ i_mail }}</a>
+                  </span>
+                </div>
+              </article>
+            </section>
+          {% endif %}
+
+          {%- comment -%}
+            The subject-line convention and the generic apply button. Set
+            `apply_subject: ""` to drop both, for a page where applications go
+            to a named person per opening instead.
+          {%- endcomment -%}
+          {% assign subj = "PhysicalAI_Application" %}
+          {% if page.apply_subject %}{% assign subj = page.apply_subject %}{% endif %}
+          {% if subj != "" %}
+            <p class="callout"><code>{{ subj }}</code></p>
+            <p class="apply-note">Use this as the subject line of your email.</p>
+
+            <a href="mailto:{{ site.email }}?subject={{ subj | url_encode }}"
+               class="btn btn-primary position-apply">Apply by email</a>
+          {% endif %}
         </div>
 
       </div>

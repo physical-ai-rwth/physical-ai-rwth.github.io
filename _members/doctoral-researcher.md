@@ -6,7 +6,7 @@ type: member
 display_types: [member]
 role: "Doctoral Researcher"
 affiliation: "Physical AI Lab, RWTH Aachen University"
-bio: "Placeholder — replace with a real member."
+quote: "[Quote from this member]"
 research:
   - Robot Learning
 email: ""

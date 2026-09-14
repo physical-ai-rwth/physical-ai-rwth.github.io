@@ -76,8 +76,8 @@ dark_header: true
               </div>
             {% else %}
               <div class="card-overlay">
-                {% if person.bio %}
-                  <p class="overlay-bio">{{ person.bio }}</p>
+                {% if person.quote and person.quote != "" %}
+                  <p class="overlay-quote">&ldquo;{{ person.quote }}&rdquo;</p>
                 {% endif %}
                 <div class="overlay-tags">
                   {% for topic in person.research %}
