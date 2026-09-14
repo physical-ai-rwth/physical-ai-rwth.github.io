@@ -1,0 +1,16 @@
+# Maps BibTeX name variants onto one canonical author id.
+#
+# The converter already normalises "Wu, Yuli" and "Yuli Wu" to the same id
+# (yuli-wu). Use this only for forms it cannot guess — initials, maiden names,
+# transliterations, misspellings in older entries.
+#
+# The key is the canonical id, which is what you put in `author_id:` in
+# _members/*.md. The list holds the variants as they appear in the .bib.
+
+aliases:
+  yuli-wu:
+    - "Y. Wu"
+    - "Wu, Y."
+  volkmar-schulz:
+    - "V. Schulz"
+    - "Schulz, V."

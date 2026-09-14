@@ -1,0 +1,54 @@
+// Colors
+$bg:              #F5F5F2;
+$bg-dark:         #0C0C0B;
+$bg-mid:          #181817;
+$text:            #111110;
+$text-muted:      #74746F;
+$text-light:      #F8F8F5;
+$text-light-muted:#9A9A94;
+
+$accent:          #00549F;   // Exact brand blue, from the source logo SVG
+$accent-light:    #2E7CC4;   // hover / on dark backgrounds
+$accent-dark:     #003A6E;
+$accent-alpha:    rgba(0, 84, 159, 0.10);
+
+$border:          rgba(17, 17, 16, 0.08);
+$border-dark:     rgba(248, 248, 245, 0.08);
+
+// Typography
+// $font-serif — display / headings.  $font-sans — running prose.
+// $font-mono  — tags, labels, badges, numeric data, short UI phrases.
+$font-serif: 'Vollkorn', Georgia, serif;
+$font-sans:  'Roboto', system-ui, sans-serif;
+$font-mono:  'Roboto Mono', ui-monospace, monospace;
+
+// Type scale — nothing below $fs-micro; mono reads smaller than a
+// proportional face at the same px, so these run a step larger than usual.
+$fs-micro:  11px;   // badges, smallest tags
+$fs-label:  12px;   // section labels, kickers, meta
+$fs-ui:     13px;   // nav, filter tabs, card roles
+$fs-small:  14px;   // buttons, secondary meta
+$fs-prose:  15px;   // supporting prose
+$fs-body:   16px;   // main prose
+
+// Corner radii
+$r-sm:  5px;    // tags, small chips
+$r-md:  9px;    // buttons, callouts
+$r-lg:  16px;   // cards, panels, portraits
+
+// Layout
+$nav-height:   80px;
+$max-width:    1240px;
+$gutter:       clamp(20px, 4vw, 48px);
+
+// Easing
+$ease-out:     cubic-bezier(0.0, 0.0, 0.2, 1);
+$ease-in-out:  cubic-bezier(0.4, 0.0, 0.2, 1);
+$t:            0.35s $ease-in-out;
+$t-slow:       0.6s $ease-in-out;
+
+// Breakpoints
+$sm: 640px;
+$md: 768px;
+$lg: 1024px;
+$xl: 1280px;

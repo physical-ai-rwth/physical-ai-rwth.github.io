@@ -1,0 +1,179 @@
+.site-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  height: $nav-height;
+  transition: background $t, border-color $t, box-shadow $t;
+
+  // Transparent over hero
+  background: transparent;
+  border-bottom: 1px solid transparent;
+
+  &.scrolled {
+    background: rgba($bg, 0.95);
+    border-bottom-color: $border;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  &.on-dark {
+    .nav-link { color: $text-light; }
+    .nav-logo-blue { opacity: 0; }
+    .nav-logo-white { opacity: 1; }
+    .nav-toggle span { background: $text-light; }
+  }
+
+  // With the menu open the header must be solid and dark-on-light, whatever
+  // the scroll state says — it sits directly above the open panel.
+  &.menu-open {
+    background: rgba($bg, 0.98);
+    border-bottom-color: $border;
+
+    .nav-link { color: $text; }
+    .nav-logo-blue { opacity: 1; }
+    .nav-logo-white { opacity: 0; }
+    .nav-toggle span { background: $text; }
+  }
+}
+
+.nav-container {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: 0 $gutter;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.nav-logo-img {
+  height: 28px;
+  width: auto;
+  transition: opacity $t;
+}
+
+// The full lockup carries text, so it needs a little more height to stay legible
+.nav-logo-full { height: 44px; }
+
+@media (max-width: $lg) { .nav-logo-full { height: 38px; } }
+@media (max-width: $sm) { .nav-logo-full { height: 30px; } }
+
+// White variant stacks on top; cross-faded via .on-dark
+.nav-logo-white {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+// The full lockup is used at every width — it scales down rather than being
+// swapped for the compact mark, so the branding never changes shape.
+.nav-logo-has-full {
+  .nav-logo-mark { display: none; }
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.nav-link {
+  font-family: $font-mono;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $text;
+  transition: color $t, opacity $t;
+  opacity: 0.7;
+
+  &:hover, &.active {
+    opacity: 1;
+  }
+}
+
+// Mobile hamburger
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 4px;
+
+  span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: $text;
+    transition: background $t, transform $t, opacity $t;
+  }
+
+  &.open {
+    span:nth-child(1) { transform: rotate(45deg) translate(4.7px, 4.7px); }
+    span:nth-child(2) { opacity: 0; }
+    span:nth-child(3) { transform: rotate(-45deg) translate(4.7px, -4.7px); }
+  }
+}
+
+.nav-mobile {
+  display: none;
+  position: fixed;
+  top: $nav-height;
+  left: 0; right: 0;
+  // Must sit above the hero: .hero-content is z-index 2 and comes later in the
+  // document, so without this the menu is painted over by the video overlay.
+  z-index: 99;
+  background: $bg;
+  border-bottom: 1px solid $border;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+  padding: 0.75rem $gutter 1.25rem;
+  flex-direction: column;
+  // Long menus stay reachable on short screens
+  max-height: calc(100vh - #{$nav-height});
+  max-height: calc(100svh - #{$nav-height});
+  overflow-y: auto;
+
+  .nav-link {
+    font-size: $fs-ui;
+    color: $text;
+    opacity: 0.75;
+    padding: 13px 0;               // 44px tap target
+    border-bottom: 1px solid $border;
+
+    &:last-child { border-bottom: none; }
+    &:hover, &.active { opacity: 1; color: $accent; }
+  }
+
+  &.open { display: flex; }
+}
+
+// Dim the page behind the open menu
+.nav-scrim {
+  position: fixed;
+  inset: $nav-height 0 0;
+  z-index: 98;
+  background: rgba($bg-dark, 0.5);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity $t, visibility $t;
+
+  &.open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  @media (min-width: $md) { display: none; }
+}
+
+@media (max-width: $md) {
+  .nav-links { display: none; }
+  .nav-toggle { display: flex; }
+}

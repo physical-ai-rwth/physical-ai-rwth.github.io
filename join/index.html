@@ -1,0 +1,41 @@
+---
+layout: default
+title: Join Us
+dark_header: true
+description: "Open positions in the Physical AI Lab at RWTH Aachen — doctoral and postdoctoral research, HiWi roles, and thesis topics."
+---
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <p class="page-kicker">Physical AI Lab</p>
+    <h1 class="page-title">Join Us</h1>
+  </div>
+</div>
+
+<div class="content-page">
+  <div class="content-section">
+
+    {% assign openings = site.positions | sort: "order" %}
+
+    <div class="openings-grid reveal">
+      {% for p in openings %}
+        <a class="opening" href="{{ p.url | relative_url }}">
+          <p class="opening-kicker">{{ p.kicker }}</p>
+          <h2 class="opening-title">{{ p.title }}</h2>
+          <p class="opening-body">{{ p.summary }}</p>
+
+          {% if p.facts %}
+            <ul class="opening-facts">
+              {% for f in p.facts %}
+                <li><span>{{ f.label }}</span> {{ f.value }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+
+          <span class="opening-more">Details</span>
+        </a>
+      {% endfor %}
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,395 @@
+// ── Section base ─────────────────────────────────
+.section {
+  padding: clamp(64px, 10vw, 120px) 0;
+}
+
+.section-dark {
+  background: $bg-dark;
+  color: $text-light;
+}
+
+.section-label {
+  font-family: $font-mono;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: $accent;
+  margin-bottom: 1.25rem;
+
+  .section-dark & { color: $accent-light; }
+}
+
+.section-heading {
+  font-family: $font-serif;
+  font-size: clamp(35px, 5.5vw, 62px);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  color: $text;
+
+  .section-dark & { color: $text-light; }
+}
+
+.section-body {
+  font-family: $font-sans;
+  font-size: 16px;
+  line-height: 1.7;
+  color: $text-muted;
+
+  .section-dark & { color: $text-light-muted; }
+}
+
+// ── Mission ───────────────────────────────────────
+.mission-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(40px, 6vw, 100px);
+  align-items: start;
+
+  @media (max-width: $md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mission-statement {
+  font-family: $font-serif;
+  font-size: clamp(23px, 3.2vw, 36px);
+  font-weight: 500;
+  line-height: 1.35;
+  color: $text;
+
+  em {
+    font-style: italic;
+    color: $accent;
+  }
+}
+
+.mission-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  padding-top: 0.5rem;
+}
+
+.mission-body {
+  font-size: 16px;
+  line-height: 1.75;
+  color: $text-muted;
+}
+
+.mission-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag {
+  font-family: $font-mono;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: $r-sm;
+  border: 1px solid $border;
+  color: $text-muted;
+
+  &.tag-accent {
+    background: $accent-alpha;
+    border-color: $accent;
+    color: $accent;
+  }
+}
+
+// ── Research pillars ──────────────────────────────
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+
+  .section-label { margin-bottom: 0; }
+}
+
+.pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+
+  @media (max-width: $lg) { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: $sm) { grid-template-columns: 1fr; }
+}
+
+.pillar {
+  position: relative;
+  // Fixed ratio keeps every card identically proportioned at any browser width
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: $r-lg;
+  border: 1px solid rgba($accent, 0.14);
+  background: $bg-mid;
+  color: inherit;
+  text-decoration: none;
+  display: block;
+  transition: transform $t, border-color $t;
+
+  &:hover {
+    transform: translateY(-3px);
+    border-color: rgba($accent, 0.42);
+
+    .pillar-bg { transform: scale(1.05); }
+    .pillar-veil { opacity: 0.82; }
+  }
+
+  &:focus-visible {
+    outline: 2px solid $accent;
+    outline-offset: 2px;
+  }
+}
+
+.pillar-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s $ease-in-out;
+}
+
+// Semi-transparent wash so the type stays readable over any image
+.pillar-veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba($bg-dark, 0.94) 0%,
+    rgba($bg-dark, 0.72) 45%,
+    rgba($bg-dark, 0.48) 100%
+  );
+  opacity: 0.92;
+  transition: opacity $t;
+}
+
+.pillar-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding: clamp(18px, 2.2vw, 28px);
+}
+
+.pillar-number {
+  font-family: $font-mono;
+  font-size: $fs-micro;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  color: $accent-light;
+}
+
+.pillar-title {
+  font-family: $font-serif;
+  font-size: clamp(19px, 1.7vw, 24px);
+  font-weight: 700;
+  line-height: 1.18;
+  color: $text-light;
+  text-wrap: balance;
+}
+
+.pillar-desc {
+  font-family: $font-sans;
+  font-size: $fs-ui;
+  line-height: 1.55;
+  color: rgba($text-light, 0.66);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.pillar-link {
+  font-family: $font-mono;
+  font-size: $fs-ui;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: $accent;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  transition: gap $t;
+
+  &::after { content: '\2192'; }
+  &:hover { gap: 10px; }
+}
+
+// ── CTA ───────────────────────────────────────────
+.cta-section {
+  background: $bg-dark;
+  text-align: center;
+  padding: clamp(80px, 12vw, 140px) 0;
+}
+
+.cta-label {
+  font-family: $font-mono;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba($text-light, 0.4);
+  margin-bottom: 1.25rem;
+}
+
+.cta-heading {
+  font-family: $font-serif;
+  font-size: clamp(29px, 6.1vw, 78px);
+  font-weight: 800;
+  line-height: 1.05;
+  color: $text-light;
+  margin-bottom: 2rem;
+
+  em {
+    font-style: italic;
+    font-weight: 400;
+    color: rgba($text-light, 0.5);
+  }
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: $font-mono;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  padding: 14px 28px;
+  border-radius: $r-md;
+  transition: background $t, color $t, transform $t;
+
+  &::after { content: '→'; }
+}
+
+.btn-primary {
+  background: $accent;
+  color: #fff;
+
+  &:hover {
+    background: $accent-light;
+    transform: translateY(-1px);
+  }
+}
+
+.btn-outline {
+  border: 1px solid rgba($text-light, 0.2);
+  color: $text-light;
+
+  &:hover {
+    border-color: rgba($text-light, 0.6);
+  }
+}
+
+// ── News / highlights ─────────────────────────────
+.highlights-grid {
+  display: grid;
+  // auto-fit, not auto-fill: with two cards the empty tracks collapse
+  // instead of leaving a gap where a third used to be
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1px;
+  background: $border-dark;
+}
+
+.highlight-card {
+  background: $bg-mid;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  &:hover .highlight-title { color: $accent-light; }
+}
+
+.highlight-date {
+  font-family: $font-mono;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: rgba($text-light, 0.35);
+}
+
+.highlight-tag {
+  font-family: $font-mono;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $accent-light;
+}
+
+.highlight-title {
+  font-family: $font-serif;
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: $text-light;
+  transition: color $t;
+}
+
+.highlight-desc {
+  font-family: $font-sans;
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba($text-light, 0.5);
+  flex: 1;
+}
+
+
+// ── Additions ─────────────────────────────────────
+
+// Section that follows another with no double padding
+.section-flush-top { padding-top: 0; }
+
+.mission-meta-label {
+  font-family: $font-mono;
+  font-size: $fs-label;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: $text-muted;
+  margin-bottom: 0.85rem;
+}
+
+.mission-statement-sm {
+  font-size: clamp(21px, 2.6vw, 28px);
+}
+
+.cta-sub {
+  font-family: $font-sans;
+  font-size: $fs-prose;
+  line-height: 1.7;
+  color: rgba($text-light, 0.55);
+  max-width: 540px;
+  margin: 0 auto 2rem;
+}
+
+// Buttons need a comfortable tap target on touch devices
+.btn {
+  min-height: 48px;
+
+  @media (max-width: $sm) {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: $sm) {
+  .pillar { padding: 28px 22px; }
+  .highlight-card { padding: 1.5rem; }
+}
+
+// "PhD / HiWi / Thesis" is a qualifier, not part of the headline — size it down
+.cta-heading em {
+  display: inline-block;
+  font-size: 0.52em;
+  letter-spacing: 0.01em;
+}

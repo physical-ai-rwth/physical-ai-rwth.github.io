@@ -1,0 +1,45 @@
+---
+layout: default
+title: Research
+dark_header: true
+description: "We develop learning-based robotic systems that perceive, reason and act in complex environments — generalist robots that autonomously solve real-world long-horizon tasks."
+---
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <p class="page-kicker">Physical AI Lab</p>
+    <h1 class="page-title">Research</h1>
+    <p class="page-desc">{{ page.description }}</p>
+  </div>
+</div>
+
+<div class="content-page">
+  <div class="content-section">
+    {% assign topics = site.research | sort: "order" %}
+    <div class="pillars-grid reveal">
+      {% for topic in topics %}
+        <a class="pillar" href="{{ topic.url | relative_url }}">
+          <img class="pillar-bg" src="{{ topic.image | relative_url }}"
+               alt="" aria-hidden="true" loading="lazy">
+          <span class="pillar-veil" aria-hidden="true"></span>
+          <span class="pillar-content">
+            <span class="pillar-title">{{ topic.title }}</span>
+            <span class="pillar-desc">{{ topic.summary }}</span>
+          </span>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<section class="cta-section">
+  <div class="container">
+    <p class="cta-label reveal">Work with us</p>
+    <h2 class="cta-heading reveal reveal-delay-1">
+      Interested in<br><em>these questions?</em>
+    </h2>
+    <a href="{{ "/join/" | relative_url }}" class="btn btn-primary reveal reveal-delay-2">
+      Open Positions
+    </a>
+  </div>
+</section>

@@ -1,0 +1,67 @@
+# GENERATED FILE — do not edit by hand.
+# Source: _bibliography/*.bib
+# Regenerate with:  python3 tools/bib2yml.py
+- key: wu2026generalist
+  type: inproceedings
+  year: '2026'
+  year_sort: 2026
+  title: Generalist Policies for Long-Horizon Robotic Manipulation
+  authors:
+  - Yuli Wu
+  - Volkmar Schulz
+  author_ids:
+  - yuli-wu
+  - volkmar-schulz
+  venue: Conference on Robot Learning (CoRL)
+  url: https://arxiv.org/abs/0000.00000
+  bibtex: "@inproceedings{wu2026generalist,\n  title     = {Generalist Policies for Long-Horizon Robotic\
+    \ Manipulation},\n  author    = {Wu, Yuli and Schulz, Volkmar},\n  booktitle = {Conference on Robot\
+    \ Learning (CoRL)},\n  year      = {2026},\n  keywords  = {vla, imitation},\n  url       = {https://arxiv.org/abs/0000.00000}\n\
+    }"
+  keywords:
+  - vla
+  - imitation
+- key: doe2025active
+  type: inproceedings
+  year: '2025'
+  year_sort: 2025
+  title: Active Perception under Partial Observability
+  authors:
+  - Jane Doe
+  - Yuli Wu
+  author_ids:
+  - jane-doe
+  - yuli-wu
+  venue: IEEE International Conference on Robotics and Automation (ICRA)
+  url: https://arxiv.org/abs/2501.00000
+  bibtex: "@inproceedings{doe2025active,\n  title        = {Active Perception under Partial Observability},\n\
+    \  author       = {Doe, Jane and Wu, Yuli},\n  booktitle    = {IEEE International Conference on Robotics\
+    \ and Automation (ICRA)},\n  year         = {2025},\n  keywords     = {active-perception},\n  eprint\
+    \       = {2501.00000},\n  archivePrefix= {arXiv}\n}"
+  keywords:
+  - active-perception
+- key: wu2025world
+  type: article
+  year: '2025'
+  year_sort: 2025
+  title: Learned World Models for Contact-Rich Manipulation
+  authors:
+  - Yuli Wu
+  - Jane Doe
+  - Volkmar Schulz
+  author_ids:
+  - yuli-wu
+  - jane-doe
+  - volkmar-schulz
+  venue: IEEE Robotics and Automation Letters
+  url: https://doi.org/10.1109/LRA.2025.000000
+  bibtex: "@article{wu2025world,\n  title   = {Learned World Models for Contact-Rich Manipulation},\n\
+    \  author  = {Yuli Wu and Jane Doe and Volkmar Schulz},\n  journal = {IEEE Robotics and Automation\
+    \ Letters},\n  volume  = {10},\n  number  = {3},\n  pages   = {1--8},\n  year    = {2025},\n  keywords\
+    \ = {world-models, dynamics},\n  doi     = {10.1109/LRA.2025.000000}\n}"
+  volume: '10'
+  number: '3'
+  pages: 1–8
+  keywords:
+  - world-models
+  - dynamics

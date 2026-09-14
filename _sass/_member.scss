@@ -1,0 +1,403 @@
+// ── Individual member page ────────────────────────
+
+.member-hero {
+  background: $bg-dark;
+  color: $text-light;
+  padding: calc(#{$nav-height} + 56px) 0 56px;
+
+  @media (max-width: $sm) {
+    padding: calc(#{$nav-height} + 36px) 0 36px;
+  }
+}
+
+.member-hero-inner {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: 0 $gutter;
+}
+
+// Breadcrumb back to the team index
+.member-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: $font-mono;
+  font-size: $fs-label;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba($text-light, 0.45);
+  margin-bottom: 2rem;
+  transition: color $t, gap $t;
+
+  &::before { content: '\2190'; }
+
+  &:hover {
+    color: $text-light;
+    gap: 11px;
+  }
+}
+
+.member-eyebrow {
+  font-family: $font-mono;
+  font-size: $fs-label;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: $accent-light;
+  margin-bottom: 0.9rem;
+}
+
+.member-name {
+  font-family: $font-serif;
+  font-size: clamp(30px, 5.4vw, 64px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: $text-light;
+  text-wrap: balance;
+}
+
+.member-affiliation {
+  font-family: $font-sans;
+  font-size: $fs-prose;
+  line-height: 1.6;
+  color: rgba($text-light, 0.5);
+  margin-top: 1rem;
+  max-width: 520px;
+}
+
+// ── Body ──────────────────────────────────────────
+.member-body {
+  padding: clamp(48px, 6vw, 88px) 0 clamp(56px, 7vw, 96px);
+}
+
+.member-grid {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: 0 $gutter;
+  display: grid;
+  grid-template-columns: minmax(200px, 240px) 1fr;
+  gap: clamp(36px, 5vw, 80px);
+  align-items: start;
+
+  @media (max-width: $md) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.member-aside {
+  position: sticky;
+  top: calc(#{$nav-height} + 28px);
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+
+  @media (max-width: $md) {
+    position: static;
+  }
+}
+
+.member-portrait {
+  position: relative;
+  // 4:3 to match the portraits produced by tools/make_portrait.py
+  width: 100%;
+  max-width: 240px;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #E8E8E5;
+  border-radius: $r-lg;
+
+  @media (max-width: $md) {
+    max-width: 200px;
+  }
+
+  img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.5s $ease-in-out, transform 0.6s $ease-in-out;
+  }
+
+  .member-portrait-alt { opacity: 0; }
+
+  &:hover {
+    .member-portrait-alt { opacity: 1; }
+    img:not(.member-portrait-alt) { opacity: 0; }
+  }
+}
+
+.member-facts {
+  border-top: 1px solid $border;
+  padding-top: 1rem;
+}
+
+.member-facts-title {
+  font-family: $font-mono;
+  font-size: $fs-micro;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: $text-muted;
+  margin-bottom: 0.8rem;
+}
+
+.member-contact-link {
+  font-family: $font-mono;
+  font-size: $fs-ui;
+  color: $accent;
+  overflow-wrap: break-word;
+  transition: opacity $t;
+
+  &:hover { opacity: 0.65; }
+}
+
+// Spec rows reuse the team-card treatment but on a light surface
+.member-facts .spec-row {
+  border-bottom-color: $border;
+}
+.member-facts .spec-label { color: $text-muted; }
+.member-facts .spec-value { color: $text; }
+
+// ── Main column ───────────────────────────────────
+.member-interests {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 1.75rem;
+}
+
+.member-lede {
+  font-family: $font-serif;
+  font-size: clamp(20px, 2.4vw, 27px);
+  font-weight: 500;
+  line-height: 1.4;
+  color: $text;
+  margin-bottom: 1.75rem;
+  text-wrap: pretty;
+}
+
+.member-prose {
+  font-family: $font-sans;
+  font-size: $fs-body;
+  line-height: 1.75;
+  color: $text-muted;
+  max-width: 62ch;
+
+  p { margin-bottom: 1.15rem; }
+  p:last-child { margin-bottom: 0; }
+
+  a {
+    color: $accent;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  h2, h3 {
+    font-family: $font-serif;
+    color: $text;
+    margin: 2rem 0 0.75rem;
+    line-height: 1.25;
+  }
+  h2 { font-size: 24px; }
+  h3 { font-size: 20px; }
+
+  ul, ol {
+    margin: 0 0 1.15rem 1.25rem;
+    list-style: disc;
+  }
+  li { margin-bottom: 0.4rem; }
+}
+
+.member-cta { margin-top: 2rem; }
+
+// ── Bottom nav ────────────────────────────────────
+.member-footnav {
+  border-top: 1px solid $border;
+}
+
+.member-footnav-inner {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: 1.5rem $gutter;
+}
+
+.member-back-bottom {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: $font-mono;
+  font-size: $fs-ui;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: $text-muted;
+  transition: color $t, gap $t;
+
+  &::before { content: '\2190'; }
+
+  &:hover { color: $accent; gap: 12px; }
+}
+
+// ── CV download ───────────────────────────────────
+.cv-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: $font-mono;
+  font-size: $fs-ui;
+  letter-spacing: 0.06em;
+  color: $accent;
+  border: 1px solid rgba($accent, 0.35);
+  border-radius: $r-md;
+  padding: 9px 13px;
+  transition: background $t, border-color $t, gap $t;
+
+  &::before { content: '\2193'; }        // down arrow
+
+  &:hover {
+    background: $accent-alpha;
+    border-color: $accent;
+    gap: 11px;
+  }
+}
+
+.cv-meta {
+  font-size: $fs-micro;
+  letter-spacing: 0.14em;
+  color: $text-muted;
+}
+
+// ── Publications on a member page ─────────────────
+.member-pubs {
+  margin-top: clamp(36px, 4.5vw, 60px);
+  padding-top: 1.75rem;
+  border-top: 1px solid $border;
+}
+
+.member-section-title {
+  font-family: $font-serif;
+  font-size: 25px;
+  font-weight: 700;
+  color: $text;
+  margin-bottom: 0.4rem;
+}
+
+// The member column is narrower than the publications page, so drop the
+// year gutter and let each entry stack.
+.member-pubs .pub-item {
+  grid-template-columns: 1fr;
+  gap: 0.3rem;
+  padding: 1.25rem 0;
+}
+
+.member-pubs .pub-year {
+  font-size: $fs-micro;
+  letter-spacing: 0.12em;
+  color: $accent;
+  padding-top: 0;
+}
+
+.member-pubs .pub-title { font-size: 18px; }
+
+
+// ── Tabular CV ────────────────────────────────────
+.member-cv {
+  margin-top: clamp(36px, 4.5vw, 60px);
+  padding-top: 1.75rem;
+  border-top: 1px solid $border;
+}
+
+.cv-table {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+}
+
+.cv-row {
+  display: grid;
+  grid-template-columns: 142px 1fr;
+  gap: 1rem;
+  padding: 0.7rem 0;
+  border-top: 1px solid $border;
+
+  &:last-child { border-bottom: 1px solid $border; }
+
+  @media (max-width: $sm) {
+    grid-template-columns: 1fr;
+    gap: 0.15rem;
+  }
+}
+
+.cv-period {
+  font-family: $font-mono;
+  font-size: $fs-ui;
+  color: $text-muted;
+  font-variant-numeric: tabular-nums;
+  padding-top: 1px;
+}
+
+.cv-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+}
+
+.cv-role {
+  font-family: $font-sans;
+  font-size: $fs-prose;
+  font-weight: 500;
+  color: $text;
+  line-height: 1.4;
+}
+
+.cv-org {
+  font-family: $font-sans;
+  font-size: $fs-small;
+  color: $text-muted;
+  line-height: 1.45;
+}
+
+.cv-note {
+  font-family: $font-sans;
+  font-size: $fs-ui;
+  font-style: italic;
+  color: $text-muted;
+  line-height: 1.45;
+}
+
+
+// ── Profile links ─────────────────────────────────
+.member-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.profile-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: $font-mono;
+  font-size: $fs-micro;
+  letter-spacing: 0.08em;
+  color: $text-muted;
+  border: 1px solid $border;
+  border-radius: $r-sm;
+  padding: 5px 9px;
+  transition: color $t, border-color $t, background $t;
+
+  &::after {
+    content: '\2197';               // north-east arrow: leaves the site
+    font-size: 0.9em;
+    opacity: 0.6;
+  }
+
+  &:hover {
+    color: $accent;
+    border-color: $accent;
+    background: $accent-alpha;
+  }
+}

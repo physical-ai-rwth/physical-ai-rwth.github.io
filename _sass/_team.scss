@@ -1,0 +1,338 @@
+// ── Page header ───────────────────────────────────
+.page-header {
+  padding: calc(#{$nav-height} + 64px) 0 64px;
+  background: $bg-dark;
+  color: $text-light;
+}
+
+.page-header-inner {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: 0 $gutter;
+}
+
+.page-kicker {
+  font-family: $font-mono;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: $accent-light;
+  margin-bottom: 1rem;
+}
+
+.page-title {
+  font-family: $font-serif;
+  font-size: clamp(37px, 7.2vw, 88px);
+  font-weight: 900;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  color: $text-light;
+  margin-bottom: 1.25rem;
+}
+
+.page-desc {
+  font-family: $font-sans;
+  font-size: 16px;
+  line-height: 1.7;
+  color: rgba($text-light, 0.55);
+  max-width: 580px;
+}
+
+// ── Filter tabs ───────────────────────────────────
+.team-filters {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid $border;
+  margin-bottom: clamp(32px, 5vw, 64px);
+  overflow-x: auto;
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+.filter-btn {
+  font-family: $font-mono;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: $text-muted;
+  padding: 14px 20px;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  white-space: nowrap;
+  transition: color $t, border-color $t;
+  cursor: pointer;
+
+  &:hover { color: $text; }
+
+  &.active {
+    color: $accent;
+    border-bottom-color: $accent;
+  }
+}
+
+// ── Team grid ─────────────────────────────────────
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;          // rounded cards need room to read as separate objects
+
+  @media (max-width: $xl) { grid-template-columns: repeat(3, 1fr); }
+  @media (max-width: $md) { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 420px) { grid-template-columns: 1fr; }
+}
+
+// ── Member card ───────────────────────────────────
+.member-card {
+  position: relative;
+  cursor: default;
+  background: $bg;
+  overflow: hidden;
+  border-radius: $r-lg;
+
+  &[data-types*="robot"] { cursor: pointer; }
+}
+
+.card-image-wrap {
+  position: relative;
+  // 4:3, matching tools/make_portrait.py output
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #E8E8E5;
+}
+
+.card-img-primary,
+.card-img-secondary {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.5s $ease-in-out, transform 0.6s $ease-in-out;
+}
+
+.card-img-secondary { opacity: 0; }
+
+.member-card:hover .card-img-primary {
+  opacity: 0;
+  transform: scale(1.04);
+}
+
+.member-card:hover .card-img-secondary {
+  opacity: 1;
+  transform: scale(1.0);
+}
+
+// No secondary image: just zoom primary
+.member-card:not([data-has-alt]):hover .card-img-primary {
+  opacity: 1;
+  transform: scale(1.04);
+}
+
+// Type badge
+.card-type-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-family: $font-mono;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  background: rgba($bg-dark, 0.75);
+  color: rgba($text-light, 0.85);
+  backdrop-filter: blur(4px);
+  border-radius: $r-sm;
+}
+
+// Info overlay on hover
+.card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top,
+    rgba($bg-dark, 0.92) 0%,
+    rgba($bg-dark, 0.5) 55%,
+    transparent 100%
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.25rem;
+  opacity: 0;
+  transition: opacity 0.4s $ease-in-out;
+
+  .member-card:hover & { opacity: 1; }
+}
+
+.overlay-bio {
+  font-family: $font-sans;
+  font-size: 13px;
+  line-height: 1.55;
+  color: rgba($text-light, 0.75);
+  margin-bottom: 0.75rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.overlay-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.overlay-tag {
+  font-family: $font-mono;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 7px;
+  background: rgba($accent, 0.3);
+  color: $accent-light;
+  border-radius: $r-sm;
+}
+
+// Specs overlay (for robots)
+.card-specs {
+  position: absolute;
+  inset: 0;
+  background: rgba($bg-dark, 0.88);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  transition: opacity 0.45s $ease-in-out;
+
+  [data-types*="robot"]:hover & { opacity: 1; }
+}
+
+.spec-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba($text-light, 0.06);
+
+  &:last-child { border-bottom: none; }
+}
+
+.spec-label {
+  font-family: $font-mono;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba($text-light, 0.4);
+}
+
+.spec-value {
+  font-family: $font-mono;
+  font-size: 15px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: $text-light;
+}
+
+// Card info below image
+.card-info {
+  padding: 1rem 1rem 1.25rem;
+  border-top: 1px solid $border;
+}
+
+.card-name {
+  font-family: $font-serif;
+  font-size: 19px;
+  font-weight: 600;
+  color: $text;
+  margin-bottom: 2px;
+}
+
+.card-role {
+  font-family: $font-mono;
+  font-size: 13px;
+  color: $text-muted;
+  margin-bottom: 6px;
+}
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.card-tag {
+  font-family: $font-mono;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 7px;
+  border-radius: $r-sm;
+  border: 1px solid $border;
+  color: $text-muted;
+
+  &.tag-leader { border-color: $accent; color: $accent; background: $accent-alpha; }
+  &.tag-head   { border-color: #7C3AED; color: #7C3AED; background: rgba(124,58,237,0.08); }
+  &.tag-member { }
+  &.tag-associate { }
+  &.tag-robot  { border-color: #059669; color: #059669; background: rgba(5,150,105,0.08); }
+}
+
+// Section for team content
+.team-section {
+  padding: clamp(48px, 6vw, 80px) 0;
+}
+
+
+@media (max-width: $sm) {
+  .page-header { padding: calc(#{$nav-height} + 40px) 0 40px; }
+  .filter-btn  { padding: 13px 15px; }   // keeps a 44px tap target
+  .card-info   { padding: 0.85rem 0.85rem 1rem; }
+  .card-specs  { padding: 1.1rem; }
+}
+
+// Cards link to individual member pages
+a.member-card {
+  color: inherit;
+  text-decoration: none;
+  display: block;
+  transition: transform $t, box-shadow $t;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.09);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $accent;
+    outline-offset: 2px;
+  }
+}
+
+.card-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 10px;
+  font-family: $font-mono;
+  font-size: $fs-micro;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $accent;
+  opacity: 0;
+  transform: translateY(-2px);
+  transition: opacity $t, transform $t, gap $t;
+
+  &::after { content: '\2192'; }
+
+  .member-card:hover & {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

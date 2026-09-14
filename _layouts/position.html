@@ -1,0 +1,92 @@
+---
+layout: default
+dark_header: true
+---
+
+<article class="position-page">
+
+  <header class="page-header">
+    <div class="page-header-inner">
+      <a href="{{ "/join/" | relative_url }}" class="member-back">Join Us</a>
+      {% if page.kicker %}<p class="page-kicker">{{ page.kicker }}</p>{% endif %}
+      <h1 class="page-title">{{ page.title }}</h1>
+      {% if page.summary %}<p class="page-desc">{{ page.summary }}</p>{% endif %}
+    </div>
+  </header>
+
+  <div class="content-page">
+    <div class="content-section">
+      <div class="position-grid">
+
+        <aside class="position-aside">
+          {% if page.facts %}
+            <div class="member-facts">
+              <p class="member-facts-title">At a glance</p>
+              {% for f in page.facts %}
+                <div class="spec-row">
+                  <span class="spec-label">{{ f.label }}</span>
+                  <span class="spec-value">{{ f.value }}</span>
+                </div>
+              {% endfor %}
+            </div>
+          {% endif %}
+
+          {%- comment -%}
+            The PDF renders only when the file exists, so a stale path can never
+            publish a dead download link.
+          {%- endcomment -%}
+          {% if page.pdf and page.pdf != "" %}
+            {% assign jd = site.static_files | where: "path", page.pdf | first %}
+            {% if jd %}
+              <div class="member-facts">
+                <p class="member-facts-title">Job description</p>
+                <a href="{{ jd.path | relative_url }}" class="cv-button"
+                   target="_blank" rel="noopener">
+                  Download
+                  <span class="cv-meta">PDF</span>
+                </a>
+              </div>
+            {% endif %}
+          {% endif %}
+
+          <div class="member-facts">
+            <p class="member-facts-title">Contact</p>
+            <a href="mailto:{{ site.email }}" class="member-contact-link">{{ site.email }}</a>
+          </div>
+        </aside>
+
+        <div class="position-main">
+          <div class="topic-prose">
+            {{ content }}
+          </div>
+
+          {% assign subj = page.apply_subject | default: "PhysicalAI_Application" %}
+          <p class="callout"><code>{{ subj }}</code></p>
+          <p class="apply-note">Use this as the subject line of your email.</p>
+
+          <a href="mailto:{{ site.email }}?subject={{ subj | url_encode }}"
+             class="btn btn-primary position-apply">Apply by email</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  {% assign others = site.positions | sort: "order" %}
+  <nav class="topic-more" aria-label="Other openings">
+    <div class="content-section">
+      <p class="section-label">Other openings</p>
+      <div class="topic-more-grid">
+        {% for p in others %}
+          {% unless p.url == page.url %}
+            <a class="topic-more-link" href="{{ p.url | relative_url }}">
+              <span class="topic-more-num">{{ p.kicker }}</span>
+              <span class="topic-more-title">{{ p.title }}</span>
+            </a>
+          {% endunless %}
+        {% endfor %}
+      </div>
+    </div>
+  </nav>
+
+</article>

@@ -1,0 +1,210 @@
+---
+layout: default
+dark_header: true
+---
+
+{% assign is_machine = false %}
+{% if page.type == "robot" %}{% assign is_machine = true %}{% endif %}
+
+<article class="member-page">
+
+  <!-- Masthead -->
+  <header class="member-hero">
+    <div class="member-hero-inner">
+      <a href="{{ "/team/" | relative_url }}" class="member-back">Team</a>
+
+      <p class="member-eyebrow">
+        {% if page.type == "leader" %}Group Leader
+        {% elsif page.type == "head" %}Head of Institute
+        {% elsif is_machine %}{{ page.role }}
+        {% elsif page.type == "associate" %}Associate Member
+        {% else %}{{ page.role }}{% endif %}
+      </p>
+
+      <h1 class="member-name">{{ page.name }}</h1>
+
+      {% unless is_machine %}
+        {% if page.affiliation %}
+          <p class="member-affiliation">{{ page.affiliation }}</p>
+        {% endif %}
+      {% endunless %}
+    </div>
+  </header>
+
+  <!-- Body: sticky media column + prose -->
+  <div class="member-body">
+    <div class="member-grid">
+
+      <aside class="member-aside">
+        <div class="member-portrait">
+          <img src="{{ page.image | relative_url }}" alt="{{ page.name }}" loading="lazy">
+          {% if page.image_alt and page.image_alt != "" %}
+            <img class="member-portrait-alt"
+                 src="{{ page.image_alt | relative_url }}"
+                 alt="" aria-hidden="true" loading="lazy">
+          {% endif %}
+        </div>
+
+        {% if is_machine and page.specs %}
+          <div class="member-facts">
+            <p class="member-facts-title">Specifications</p>
+            {% for spec in page.specs %}
+              <div class="spec-row">
+                <span class="spec-label">{{ spec.label }}</span>
+                <span class="spec-value">{{ spec.value }}</span>
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        {% if page.email and page.email != "" %}
+          <div class="member-facts">
+            <p class="member-facts-title">Contact</p>
+            <a href="mailto:{{ page.email }}" class="member-contact-link">{{ page.email }}</a>
+          </div>
+        {% endif %}
+
+        {%- comment -%}
+          The PDF is optional — the tabular CV in the main column is the primary
+          form. Renders only when the file actually exists, so a stale path can
+          never produce a dead download link.
+        {%- endcomment -%}
+        {% if page.cv_pdf and page.cv_pdf != "" %}
+          {% assign cv_file = site.static_files | where: "path", page.cv_pdf | first %}
+          {% if cv_file %}
+            <div class="member-facts">
+              <p class="member-facts-title">Full CV</p>
+              <a href="{{ cv_file.path | relative_url }}"
+                 class="cv-button"
+                 target="_blank" rel="noopener">
+                Download
+                <span class="cv-meta">PDF</span>
+              </a>
+            </div>
+          {% endif %}
+        {% endif %}
+
+        {%- comment -%}
+          Profile links. Every one is optional: name a known key (scholar,
+          linkedin, github, orcid, arxiv, x, bluesky, mastodon, website,
+          researchgate, semanticscholar, dblp) and the label is filled in, or
+          pass your own `label` for anything else.
+        {%- endcomment -%}
+        {% if page.links and page.links.size > 0 %}
+          <div class="member-facts">
+            <p class="member-facts-title">Profiles</p>
+            <div class="member-links">
+              {% for l in page.links %}
+                {% case l.key %}
+                  {% when 'scholar' %}{% assign lbl = 'Google Scholar' %}
+                  {% when 'linkedin' %}{% assign lbl = 'LinkedIn' %}
+                  {% when 'github' %}{% assign lbl = 'GitHub' %}
+                  {% when 'orcid' %}{% assign lbl = 'ORCID' %}
+                  {% when 'arxiv' %}{% assign lbl = 'arXiv' %}
+                  {% when 'x' %}{% assign lbl = 'X' %}
+                  {% when 'bluesky' %}{% assign lbl = 'Bluesky' %}
+                  {% when 'mastodon' %}{% assign lbl = 'Mastodon' %}
+                  {% when 'researchgate' %}{% assign lbl = 'ResearchGate' %}
+                  {% when 'semanticscholar' %}{% assign lbl = 'Semantic Scholar' %}
+                  {% when 'dblp' %}{% assign lbl = 'DBLP' %}
+                  {% when 'website' %}{% assign lbl = 'Website' %}
+                  {% else %}{% assign lbl = nil %}
+                {% endcase %}
+                {% assign lbl = l.label | default: lbl | default: l.key %}
+                <a href="{{ l.url }}" target="_blank" rel="noopener me"
+                   class="profile-link">{{ lbl }}</a>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+      </aside>
+
+      <div class="member-main">
+        {% if page.research %}
+          <div class="member-interests">
+            {% for topic in page.research %}
+              <span class="tag tag-accent">{{ topic }}</span>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        {% if page.description %}
+          <p class="member-lede">{{ page.description }}</p>
+        {% elsif page.bio %}
+          <p class="member-lede">{{ page.bio }}</p>
+        {% endif %}
+
+        <div class="member-prose">
+          {{ content }}
+        </div>
+
+        {%- comment -%}
+          Short CV: one flat list of rows, `period` on the left and details on
+          the right. Omit `cv:` entirely and nothing renders.
+        {%- endcomment -%}
+        {% if page.cv and page.cv.size > 0 %}
+          <section class="member-cv">
+            <h2 class="member-section-title">Curriculum Vitae</h2>
+            <dl class="cv-table">
+              {% for row in page.cv %}
+                <div class="cv-row">
+                  <dt class="cv-period">{{ row.period }}</dt>
+                  <dd class="cv-detail">
+                    <span class="cv-role">{{ row.title }}</span>
+                    {% if row.org and row.org != "" %}
+                      <span class="cv-org">{{ row.org }}</span>
+                    {% endif %}
+                    {% if row.note and row.note != "" %}
+                      <span class="cv-note">{{ row.note }}</span>
+                    {% endif %}
+                  </dd>
+                </div>
+              {% endfor %}
+            </dl>
+          </section>
+        {% endif %}
+
+        {%- comment -%}
+          Publications are matched on author_id against the generated
+          _data/publications.yml. Name variants are resolved upstream by
+          tools/bib2yml.py via _data/author_aliases.yml, so a single
+          equality test is enough here.
+        {%- endcomment -%}
+        {%- comment -%}
+          Opt out entirely with `show_publications: false`, even when the person
+          has papers in the bibliography.
+        {%- endcomment -%}
+        {% unless page.show_publications == false %}
+          {% if page.author_id and page.author_id != "" %}
+            {% assign mine = site.data.publications
+               | where_exp: "p", "p.author_ids contains page.author_id" %}
+            {% if mine and mine.size > 0 %}
+              <section class="member-pubs">
+                <h2 class="member-section-title">Publications</h2>
+                <div class="pub-list">
+                  {% for pub in mine %}
+                    {% include publication.html pub=pub highlight=page.author_id %}
+                  {% endfor %}
+                </div>
+              </section>
+            {% endif %}
+          {% endif %}
+        {% endunless %}
+
+        {% if page.cta %}
+          <a href="{{ page.cta.url | relative_url }}" class="btn btn-primary member-cta">
+            {{ page.cta.label }}
+          </a>
+        {% endif %}
+      </div>
+
+    </div>
+  </div>
+
+  <nav class="member-footnav" aria-label="Team navigation">
+    <div class="member-footnav-inner">
+      <a href="{{ "/team/" | relative_url }}" class="member-back-bottom">Back to team</a>
+    </div>
+  </nav>
+
+</article>

@@ -1,0 +1,93 @@
+---
+layout: default
+dark_header: true
+---
+
+<article class="topic-page">
+
+  <header class="topic-hero">
+    {% if page.image %}
+      <img class="topic-hero-bg" src="{{ page.image | relative_url }}"
+           alt="" aria-hidden="true">
+      <span class="topic-hero-veil" aria-hidden="true"></span>
+    {% endif %}
+
+    <div class="topic-hero-inner">
+      <a href="{{ "/research/" | relative_url }}" class="member-back">Research</a>
+      <h1 class="topic-title">{{ page.title }}</h1>
+      {% if page.summary %}
+        <p class="topic-summary">{{ page.summary }}</p>
+      {% endif %}
+    </div>
+  </header>
+
+  <div class="topic-body">
+    <div class="content-section">
+
+      {% if page.topics and page.topics.size > 0 %}
+        <div class="topic-tags">
+          {% for t in page.topics %}<span class="tag tag-accent">{{ t }}</span>{% endfor %}
+        </div>
+      {% endif %}
+
+      <div class="topic-prose">
+        {{ content }}
+      </div>
+
+      {%- comment -%}
+        Publications are optional. A topic collects papers two ways, unioned:
+          pub_keys      — explicit BibTeX keys
+          pub_keywords  — matched against the `keywords` field of each entry
+        With neither set, no section renders.
+      {%- endcomment -%}
+      {% assign matched = "" | split: "" %}
+
+      {% if page.pub_keys and page.pub_keys.size > 0 %}
+        {% assign by_key = site.data.publications
+           | where_exp: "p", "page.pub_keys contains p.key" %}
+        {% assign matched = matched | concat: by_key %}
+      {% endif %}
+
+      {% if page.pub_keywords %}
+        {% for kw in page.pub_keywords %}
+          {% assign needle = kw | downcase %}
+          {% assign by_kw = site.data.publications
+             | where_exp: "p", "p.keywords contains needle" %}
+          {% assign matched = matched | concat: by_kw %}
+        {% endfor %}
+      {% endif %}
+
+      {% assign matched = matched | uniq | sort: "year_sort" | reverse %}
+
+      {% if matched.size > 0 %}
+        <section class="topic-pubs">
+          <h2 class="member-section-title">Publications</h2>
+          <div class="pub-list">
+            {% for pub in matched %}
+              {% include publication.html pub=pub %}
+            {% endfor %}
+          </div>
+        </section>
+      {% endif %}
+
+    </div>
+  </div>
+
+  {%- comment -%} Sibling topics, so a reader can move sideways. {%- endcomment -%}
+  {% assign others = site.research | sort: "order" %}
+  <nav class="topic-more" aria-label="Other research directions">
+    <div class="content-section">
+      <p class="section-label">Other directions</p>
+      <div class="topic-more-grid">
+        {% for t in others %}
+          {% unless t.url == page.url %}
+            <a class="topic-more-link" href="{{ t.url | relative_url }}">
+              <span class="topic-more-title">{{ t.title }}</span>
+            </a>
+          {% endunless %}
+        {% endfor %}
+      </div>
+    </div>
+  </nav>
+
+</article>

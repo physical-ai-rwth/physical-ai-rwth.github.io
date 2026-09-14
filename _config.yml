@@ -1,0 +1,85 @@
+title: Physical AI Lab
+tagline: Robots that learn for the real world.
+description: The Physical AI Lab at the Chair of Imaging and Computer Vision, RWTH Aachen University, develops generalist robots that autonomously solve real-world long-horizon tasks.
+author: Physical AI Lab, RWTH Aachen University
+url: "https://physical-ai-rwth.github.io"
+baseurl: ""
+
+email: robot@lfb.rwth-aachen.de
+
+institute: Chair of Imaging and Computer Vision
+faculty: Faculty of Electrical Engineering and Information Technology
+university: RWTH Aachen University
+address: Kopernikusstr. 16, 52074 Aachen, Germany
+
+# Hero background video. Set youtube_id to embed a YouTube clip, or drop a file
+# at assets/video/hero.mp4 to self-host. A local file always wins if present.
+hero_video:
+  youtube_id: "aWLz0HYobd8"
+  title: "Robot training footage"
+  # Shown bottom-right over the video. Only appears for the YouTube embed —
+  # it disappears by itself once you self-host your own hero.mp4.
+  # Set to "" to hide it entirely.
+  credit: "Third-party footage"
+
+markdown: kramdown
+highlighter: rouge
+
+sass:
+  sass_dir: _sass
+  style: compressed
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Each member gets an individual page at /team/<slug>/
+collections:
+  members:
+    output: true
+    permalink: /team/:name/
+  research:
+    output: true
+    permalink: /research/:name/
+  positions:
+    output: true
+    permalink: /join/:name/
+
+defaults:
+  - scope:
+      type: members
+    values:
+      layout: member
+  - scope:
+      type: research
+    values:
+      layout: research-topic
+  - scope:
+      type: positions
+    values:
+      layout: position
+
+navigation:
+  - title: Home
+    url: /
+  - title: Research
+    url: /research/
+  - title: Team
+    url: /team/
+  # Publications is hidden for now. The page and _data/publications.yml still
+  # build — uncomment these two lines to put it back in the nav.
+  # - title: Publications
+  #   url: /publications/
+  - title: Join Us
+    url: /join/
+
+exclude:
+  - raw-photos/
+  - tools/
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
+  - vollkorn-4-105/
+  - "*.sh"
+  - .DS_Store
+  - node_modules/

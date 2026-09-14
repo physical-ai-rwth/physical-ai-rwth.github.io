@@ -1,0 +1,110 @@
+---
+layout: default
+title: Team
+dark_header: true
+---
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <p class="page-kicker">Physical AI Lab</p>
+    <h1 class="page-title">Our Team</h1>
+    <p class="page-desc">
+      People and machines working together. We are researchers, engineers,
+      and the hardware that makes the work possible.
+    </p>
+  </div>
+</div>
+
+<div class="team-section">
+  <div class="container">
+
+    {% assign roster = site.members | sort: "order" %}
+
+    <!-- Filter tabs — only rendered for groups that actually have entries -->
+    {% assign all_types = "" | split: "" %}
+    {% for p in roster %}
+      {% assign all_types = all_types | concat: p.display_types %}
+    {% endfor %}
+    {% assign all_types = all_types | uniq %}
+
+    <div class="team-filters" role="tablist">
+      <button class="filter-btn active" data-filter="all" role="tab">All</button>
+      {% if all_types contains "member" %}
+        <button class="filter-btn" data-filter="member" role="tab">Members</button>
+      {% endif %}
+      {% if all_types contains "associate" %}
+        <button class="filter-btn" data-filter="associate" role="tab">Associates</button>
+      {% endif %}
+      {% if all_types contains "robot" %}
+        <button class="filter-btn" data-filter="robot" role="tab">Robots</button>
+      {% endif %}
+    </div>
+
+    <div class="team-grid">
+      {% for person in roster %}
+        {% assign types_str = person.display_types | join: "," %}
+        <a class="member-card"
+           href="{{ person.url | relative_url }}"
+           data-types="{{ types_str }}"
+           {% if person.image_alt and person.image_alt != "" %}data-has-alt="true"{% endif %}>
+
+          <div class="card-image-wrap">
+            <img class="card-img-primary"
+                 src="{{ person.image | relative_url }}"
+                 alt="{{ person.name }}"
+                 loading="lazy">
+
+            {% if person.image_alt and person.image_alt != "" %}
+              <img class="card-img-secondary"
+                   src="{{ person.image_alt | relative_url }}"
+                   alt="" aria-hidden="true"
+                   loading="lazy">
+            {% endif %}
+
+            <span class="card-type-badge">
+              {% if person.type == "leader" %}Group Leader
+              {% elsif person.type == "head" %}Institute Head
+              {% elsif person.type == "robot" %}Robot
+              {% elsif person.type == "associate" %}Associate
+              {% else %}Member{% endif %}
+            </span>
+
+            {% if person.type == "robot" %}
+              <div class="card-specs">
+                {% for spec in person.specs %}
+                  <div class="spec-row">
+                    <span class="spec-label">{{ spec.label }}</span>
+                    <span class="spec-value">{{ spec.value }}</span>
+                  </div>
+                {% endfor %}
+              </div>
+            {% else %}
+              <div class="card-overlay">
+                {% if person.bio %}
+                  <p class="overlay-bio">{{ person.bio }}</p>
+                {% endif %}
+                <div class="overlay-tags">
+                  {% for topic in person.research %}
+                    <span class="overlay-tag">{{ topic }}</span>
+                  {% endfor %}
+                </div>
+              </div>
+            {% endif %}
+          </div>
+
+          <div class="card-info">
+            <p class="card-name">{{ person.name }}</p>
+            <p class="card-role">{{ person.role }}</p>
+            <div class="card-tags">
+              {% for t in person.display_types %}
+                <span class="card-tag tag-{{ t }}">{{ t }}</span>
+              {% endfor %}
+            </div>
+            <span class="card-more">View profile</span>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+
+  </div>
+</div>

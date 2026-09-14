@@ -1,0 +1,40 @@
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="{{ "/assets/images/logo/pai_logo_white.svg" | relative_url }}"
+             alt="{{ site.title }}"
+             class="footer-logo"
+             height="28">
+        <p class="footer-tagline">{{ site.tagline }}</p>
+        <p class="footer-affil">
+          {{ site.title }}<br>
+          {{ site.institute }}<br>
+          {{ site.university }}<br>
+          {{ site.address }}
+        </p>
+      </div>
+
+      <div>
+        <p class="footer-col-title">Navigate</p>
+        <div class="footer-links">
+          {% for item in site.navigation %}
+            <a href="{{ item.url | relative_url }}" class="footer-link">{{ item.title }}</a>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div>
+        <p class="footer-col-title">Contact</p>
+        <div class="footer-links">
+          <a href="mailto:{{ site.email }}" class="footer-link">{{ site.email }}</a>
+          <a href="https://www.rwth-aachen.de" class="footer-link" target="_blank" rel="noopener">RWTH Aachen</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; {{ site.time | date: "%Y" }} Physical AI Lab, RWTH Aachen University.</p>
+    </div>
+  </div>
+</footer>

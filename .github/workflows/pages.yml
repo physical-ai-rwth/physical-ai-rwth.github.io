@@ -1,0 +1,57 @@
+# Builds the site with the Gemfile in this repo and publishes it to GitHub Pages.
+#
+# Why Actions rather than Pages' own branch build: the branch build ignores your
+# Gemfile and uses GitHub's pinned Jekyll 3.x, which is not the Jekyll 4 this
+# site is developed and tested against. Building here means what you see locally
+# is what ships.
+
+name: Deploy site
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:        # lets you re-deploy from the Actions tab by hand
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Never let two deploys race; queue instead of cancelling a half-finished one
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+          bundler-cache: true     # needs Gemfile.lock committed
+
+      - name: Configure Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      # base_path is "" for a <org>.github.io repo and "/<repo>" otherwise,
+      # so this is correct either way and survives a later rename.
+      - name: Build
+        env:
+          JEKYLL_ENV: production
+        run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
+
+      - uses: actions/upload-pages-artifact@v3
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

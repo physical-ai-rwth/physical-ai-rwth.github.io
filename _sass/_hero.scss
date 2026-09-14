@@ -1,0 +1,181 @@
+.hero {
+  position: relative;
+  height: 100vh;
+  // Mobile browsers shrink the viewport when the address bar hides; svh keeps
+  // the hero from being cropped and from jumping mid-scroll.
+  height: 100svh;
+  min-height: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: $bg-dark;
+
+  @media (max-width: $sm) {
+    min-height: 460px;
+  }
+}
+
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+// YouTube iframes are locked to 16:9, so scale past the viewport on whichever
+// axis is short to get a cover fit, then centre it.
+.hero-video-frame {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 56.25vw;        // 16:9 height derived from width
+  min-width: 177.78vh;    // 16:9 width derived from height
+  min-height: 100vh;
+  border: 0;
+  opacity: 0.55;
+  pointer-events: none;   // never swallow clicks or scrolls
+
+  // Overscale so YouTube's own title/chrome sits outside the visible area
+  transform: translate(-50%, -50%) scale(1.45);
+}
+
+// Ambient gradient overlay — dark vignette + subtle blue warmth
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 25% 60%, rgba($accent, 0.18) 0%, transparent 60%),
+    linear-gradient(
+      to bottom,
+      rgba($bg-dark, 0.55) 0%,
+      rgba($bg-dark, 0.25) 45%,
+      rgba($bg-dark, 0.65) 100%
+    );
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 $gutter;
+  max-width: 1100px;      // room for the larger headline
+}
+
+.hero-logo {
+  width: clamp(48px, 6vw, 72px);
+  height: auto;
+  margin: 0 auto 2rem;
+  opacity: 0.9;
+}
+
+.hero-title {
+  font-family: $font-mono;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba($text-light, 0.6);
+  margin-bottom: 1.25rem;
+}
+
+.hero-tagline {
+  font-family: $font-serif;
+  // Always three lines. "Robots that learn" on one line is limited by the
+  // content box, not the clamp — stacking after "Robots" is what allows the
+  // type to get this large. The binding line is the italic one.
+  font-size: clamp(38px, 10.5vw, 132px);
+  font-weight: 900;
+  line-height: 1.04;
+  color: $text-light;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.75rem;
+  text-wrap: balance;
+
+  em {
+    font-style: italic;
+    font-weight: 400;
+    font-size: 0.74em;        // subordinate to the first line
+    color: rgba($text-light, 0.7);
+  }
+}
+
+.hero-sub {
+  font-family: $font-sans;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: rgba($text-light, 0.5);
+}
+
+// Scroll indicator
+.hero-scroll {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba($text-light, 0.4);
+}
+
+.scroll-label {
+  font-family: $font-mono;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, rgba($text-light, 0.4), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.4; transform: scaleY(1); }
+  50% { opacity: 0.9; transform: scaleY(1.2); }
+}
+
+// Attribution for placeholder footage — sits inside the video area,
+// bottom-right, clear of the centred scroll cue.
+.hero-credit {
+  position: absolute;
+  right: $gutter;
+  bottom: 1.25rem;
+  z-index: 3;
+  font-family: $font-mono;
+  font-size: 10px;            // an attribution, deliberately unobtrusive
+  letter-spacing: 0.06em;
+  color: rgba($text-light, 0.42);
+  text-align: right;
+  max-width: 46vw;
+  pointer-events: none;
+
+  @media (max-width: $sm) {
+    // Below the scroll cue on phones, centred, so the two never collide
+    right: $gutter;
+    left: $gutter;
+    bottom: 0.6rem;
+    max-width: none;
+    text-align: center;
+    font-size: 9px;
+  }
+}
+
+
+// Break after "Robots" at every width. An empty block element in inline flow
+// breaks the line more reliably than toggling `display` on a <br>.
+.brk-sm {
+  display: block;
+  height: 0;
+}

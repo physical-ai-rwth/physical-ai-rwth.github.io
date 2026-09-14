@@ -1,0 +1,59 @@
+<header class="site-header{% if page.dark_header %} on-dark{% endif %}" id="site-header">
+  <div class="nav-container">
+    {%- comment -%}
+      Header uses the full lockup (mark + "Physical AI Lab") when those files exist,
+      falling back to the compact mark. SVG wins over PNG. Two colour variants are
+      required: the nav cross-fades white over the dark hero and blue over light content.
+      Narrow screens always use the compact mark — see _header.scss.
+    {%- endcomment -%}
+    {%- assign logo_dir = "/assets/images/logo/" -%}
+    {%- assign full_blue  = site.static_files | where_exp: "f", "f.path == '/assets/images/logo/pai_logo_full_blue.svg' or f.path == '/assets/images/logo/pai_logo_full_blue.png'"  | first -%}
+    {%- assign full_white = site.static_files | where_exp: "f", "f.path == '/assets/images/logo/pai_logo_full_white.svg' or f.path == '/assets/images/logo/pai_logo_full_white.png'" | first -%}
+    {%- if full_blue and full_white -%}{%- assign has_full = true -%}{%- endif -%}
+
+    <a href="{{ "/" | relative_url }}"
+       class="nav-logo{% if has_full %} nav-logo-has-full{% endif %}"
+       aria-label="{{ site.title }}">
+
+      {%- if has_full %}
+      <img src="{{ full_blue.path | relative_url }}"
+           alt="{{ site.title }}"
+           class="nav-logo-img nav-logo-full nav-logo-blue">
+      <img src="{{ full_white.path | relative_url }}"
+           alt="" aria-hidden="true"
+           class="nav-logo-img nav-logo-full nav-logo-white">
+      {%- endif %}
+
+      <img src="{{ logo_dir | append: 'pai_logo_blue.svg' | relative_url }}"
+           alt="{% unless has_full %}{{ site.title }}{% endunless %}"
+           {% if has_full %}aria-hidden="true"{% endif %}
+           class="nav-logo-img nav-logo-mark nav-logo-blue"
+           height="28">
+      <img src="{{ logo_dir | append: 'pai_logo_white.svg' | relative_url }}"
+           alt="" aria-hidden="true"
+           class="nav-logo-img nav-logo-mark nav-logo-white"
+           height="28">
+    </a>
+
+    <nav class="nav-links" role="navigation" aria-label="Main navigation">
+      {% for item in site.navigation %}
+        <a href="{{ item.url | relative_url }}"
+           class="nav-link{% if page.url == item.url %} active{% endif %}">
+          {{ item.title }}
+        </a>
+      {% endfor %}
+    </nav>
+
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="nav-mobile" id="nav-mobile" aria-label="Mobile navigation">
+  {% for item in site.navigation %}
+    <a href="{{ item.url | relative_url }}"
+       class="nav-link{% if page.url == item.url %} active{% endif %}">{{ item.title }}</a>
+  {% endfor %}
+</nav>
+<div class="nav-scrim" id="nav-scrim" hidden></div>

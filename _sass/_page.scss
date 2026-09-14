@@ -1,0 +1,497 @@
+// Generic content pages (research, join, publications)
+.content-page {
+  padding-top: $nav-height;
+  min-height: 100vh;
+}
+
+.content-section {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: clamp(48px, 7vw, 96px) $gutter;
+}
+
+// Two-column research layout
+.research-area {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: clamp(32px, 5vw, 80px);
+  padding: clamp(32px, 4vw, 56px) 0;
+  border-top: 1px solid $border;
+
+  &:last-child { border-bottom: 1px solid $border; }
+
+  @media (max-width: $md) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+.research-area-label {
+  font-family: $font-serif;
+  font-size: clamp(30px, 4.4vw, 45px);
+  font-weight: 700;
+  line-height: 1.1;
+  color: $text;
+  letter-spacing: -0.01em;
+}
+
+.research-area-num {
+  font-family: $font-mono;
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  color: $accent;
+  margin-bottom: 0.75rem;
+}
+
+.research-area-body {
+  font-family: $font-sans;
+  font-size: 16px;
+  line-height: 1.75;
+  color: $text-muted;
+}
+
+.research-area-topics {
+  margin-top: 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+// ── Publications ──────────────────────────────────
+.pub-toolbar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid $border;
+}
+
+.pub-years {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.pub-year-chip {
+  font-family: $font-mono;
+  font-size: $fs-micro;
+  letter-spacing: 0.1em;
+  padding: 4px 10px;
+  border: 1px solid $border;
+  border-radius: $r-sm;
+  color: $text-muted;
+  transition: color $t, border-color $t, background $t;
+
+  &:hover {
+    color: $accent;
+    border-color: $accent;
+    background: $accent-alpha;
+  }
+}
+
+.pub-year-group { margin-top: clamp(32px, 4vw, 52px); }
+
+.pub-year-heading {
+  font-family: $font-serif;
+  font-size: clamp(26px, 3.2vw, 36px);
+  font-weight: 700;
+  color: $text;
+  margin-bottom: 0.5rem;
+  scroll-margin-top: calc(#{$nav-height} + 20px);
+}
+
+.pub-list { display: flex; flex-direction: column; }
+
+.pub-item {
+  padding: 1.5rem 0;
+  border-top: 1px solid $border;
+  display: grid;
+  grid-template-columns: 62px 1fr;
+  gap: 1.25rem;
+
+  &:last-child { border-bottom: 1px solid $border; }
+
+  @media (max-width: $sm) {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
+}
+
+.pub-year {
+  font-family: $font-mono;
+  font-size: $fs-ui;
+  color: $text-muted;
+  padding-top: 3px;
+}
+
+.pub-title {
+  font-family: $font-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: $text;
+  margin-bottom: 5px;
+
+  a { color: inherit; transition: color $t; }
+  a:hover { color: $accent; }
+}
+
+.pub-authors {
+  font-family: $font-sans;
+  font-size: $fs-small;
+  line-height: 1.55;
+  color: $text-muted;
+  margin-bottom: 3px;
+
+  strong { color: $text; font-weight: 600; }
+}
+
+.pub-venue {
+  font-family: $font-sans;
+  font-size: $fs-ui;
+  font-style: italic;
+  color: $accent;
+}
+
+.pub-note {
+  font-family: $font-mono;
+  font-size: $fs-micro;
+  letter-spacing: 0.06em;
+  color: $text-muted;
+  margin-top: 5px;
+}
+
+.pub-actions {
+  display: flex;
+  gap: 0.85rem;
+  margin-top: 0.7rem;
+}
+
+.pub-action {
+  font-family: $font-mono;
+  font-size: $fs-micro;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: $text-muted;
+  border: 1px solid $border;
+  border-radius: $r-sm;
+  padding: 5px 10px;
+  background: none;
+  cursor: pointer;
+  transition: color $t, border-color $t, background $t;
+
+  &:hover, &.active {
+    color: $accent;
+    border-color: $accent;
+    background: $accent-alpha;
+  }
+}
+
+.pub-bibtex {
+  margin-top: 0.8rem;
+  padding: 14px 16px;
+  background: $bg-dark;
+  border-radius: $r-md;
+  overflow-x: auto;
+
+  code {
+    font-family: $font-mono;
+    font-size: 12px;
+    line-height: 1.6;
+    color: rgba($text-light, 0.82);
+    white-space: pre;
+  }
+}
+
+// Join page — benefits
+.benefit-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.benefit-item {
+  font-family: $font-sans;
+  font-size: 15px;
+  line-height: 1.65;
+  color: $text-muted;
+  padding-left: 1rem;
+  border-left: 2px solid $accent;
+
+  strong {
+    font-family: $font-mono;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: $text;
+    display: block;
+    margin-bottom: 4px;
+  }
+}
+
+.apply-body {
+  font-family: $font-sans;
+  font-size: 15px;
+  line-height: 1.75;
+  color: $text-muted;
+
+  a { color: $accent; }
+
+  ul {
+    margin-top: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding-left: 1.25rem;
+    list-style: disc;
+  }
+}
+
+.positions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: $border;
+}
+
+.position-card {
+  background: $bg;
+  padding: 2rem $gutter;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  transition: background $t;
+
+  &:hover { background: $accent-alpha; }
+
+  @media (max-width: $sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.position-title {
+  font-family: $font-serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: $text;
+  margin-bottom: 4px;
+}
+
+.position-meta {
+  font-family: $font-mono;
+  font-size: 14px;
+  color: $text-muted;
+}
+
+.position-link {
+  font-family: $font-mono;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: $accent;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: gap $t;
+
+  &::after { content: '→'; }
+  &:hover { gap: 9px; }
+}
+
+// ── Join page blocks ──────────────────────────────
+.join-block {
+  margin-top: clamp(48px, 7vw, 96px);
+}
+
+.callout {
+  font-family: $font-mono;
+  font-size: $fs-small;
+  background: $accent-alpha;
+  border-left: 2px solid $accent;
+  padding: 12px 14px;
+  margin: 0.85rem 0 1.25rem;
+  color: $accent-dark;
+  overflow-x: auto;
+
+  code { font-family: inherit; }
+}
+
+.apply-contact {
+  font-family: $font-mono;
+  font-size: $fs-label;
+  line-height: 1.7;
+  color: $text-muted;
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid $border;
+}
+
+.empty-note {
+  font-family: $font-sans;
+  font-size: $fs-prose;
+  line-height: 1.7;
+  color: $text-muted;
+  padding: 2rem 0;
+  border-top: 1px solid $border;
+
+  a { color: $accent; }
+}
+
+.pub-title a:hover { color: $accent; }
+
+@media (max-width: $sm) {
+  .position-card { padding: 1.5rem $gutter; }
+  .pub-item {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+}
+
+// ── Openings: PhD/PostDoc, HiWi, Thesis ───────────
+.openings-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+
+  @media (max-width: $lg) { grid-template-columns: 1fr; }
+}
+
+.opening {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  border: 1px solid rgba($accent, 0.14);
+  border-radius: $r-lg;
+  padding: clamp(26px, 3vw, 38px);
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  transition: background $t, border-color $t, transform $t;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.78);
+    border-color: rgba($accent, 0.3);
+    transform: translateY(-2px);
+  }
+}
+
+.opening-kicker {
+  font-family: $font-mono;
+  font-size: $fs-micro;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: $accent;
+}
+
+.opening-title {
+  font-family: $font-serif;
+  font-size: clamp(24px, 2.6vw, 30px);
+  font-weight: 700;
+  line-height: 1.15;
+  color: $text;
+}
+
+.opening-body {
+  font-family: $font-sans;
+  font-size: $fs-prose;
+  line-height: 1.7;
+  color: $text-muted;
+  flex: 1;
+}
+
+.opening-facts {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid $border;
+
+  li {
+    display: flex;
+    gap: 0.6rem;
+    font-family: $font-mono;
+    font-size: $fs-label;
+    color: $text;
+
+    span {
+      min-width: 68px;
+      color: $text-muted;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: $fs-micro;
+      padding-top: 1px;
+    }
+  }
+}
+
+.opening-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.1rem;
+  padding-top: 0.35rem;
+}
+
+// ── Opening cards become links ────────────────────
+a.opening {
+  color: inherit;
+  text-decoration: none;
+
+  &:focus-visible { outline: 2px solid $accent; outline-offset: 2px; }
+}
+
+.opening-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 0.4rem;
+  font-family: $font-mono;
+  font-size: $fs-micro;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $accent;
+  transition: gap $t;
+
+  &::after { content: '\2192'; }
+  .opening:hover & { gap: 10px; }
+}
+
+// ── Individual position page ──────────────────────
+.position-grid {
+  display: grid;
+  grid-template-columns: minmax(200px, 250px) 1fr;
+  gap: clamp(36px, 5vw, 76px);
+  align-items: start;
+
+  @media (max-width: $md) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.position-aside {
+  position: sticky;
+  top: calc(#{$nav-height} + 28px);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  @media (max-width: $md) { position: static; }
+}
+
+.position-aside .spec-row { border-bottom-color: $border; }
+.position-aside .spec-label { color: $text-muted; }
+.position-aside .spec-value { color: $text; }
+
+.apply-note {
+  font-family: $font-sans;
+  font-size: $fs-ui;
+  color: $text-muted;
+  margin-top: -0.85rem;
+}
+
+.position-apply { margin-top: 1.25rem; }

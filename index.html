@@ -1,0 +1,151 @@
+---
+layout: default
+title: Home
+dark_header: true
+---
+
+<!-- ── Hero ──────────────────────────────────────── -->
+<section class="hero">
+  {%- comment -%}
+    Background footage, in priority order:
+      1. assets/video/hero.mp4          — self-hosted, best for privacy
+      2. site.hero_video.youtube_id     — set in _config.yml
+      3. neither                        — ambient gradient only
+  {%- endcomment -%}
+  {% assign hero_video = site.static_files | where: "path", "/assets/video/hero.mp4" | first %}
+
+  {% if hero_video %}
+    <video class="hero-video" autoplay muted loop playsinline preload="auto">
+      <source src="{{ hero_video.path | relative_url }}" type="video/mp4">
+    </video>
+  {% elsif site.hero_video.youtube_id and site.hero_video.youtube_id != "" %}
+    {% assign yt = site.hero_video.youtube_id %}
+    <iframe
+      class="hero-video-frame"
+      src="https://www.youtube-nocookie.com/embed/{{ yt }}?autoplay=1&mute=1&loop=1&playlist={{ yt }}&controls=0&showinfo=0&modestbranding=1&playsinline=1&rel=0&disablekb=1&fs=0&iv_load_policy=3"
+      title="{{ site.hero_video.title | default: 'Background footage' }}"
+      frameborder="0"
+      allow="autoplay; encrypted-media"
+      tabindex="-1"
+      aria-hidden="true"></iframe>
+    {% if site.hero_video.credit and site.hero_video.credit != "" %}
+      <p class="hero-credit">{{ site.hero_video.credit }}</p>
+    {% endif %}
+  {% endif %}
+
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    {%- comment -%}
+      No logo here by design — the header lockup already carries the branding,
+      and repeating it twice in the first viewport crowds the headline.
+    {%- endcomment -%}
+    <p class="hero-title">Physical AI Lab &mdash; RWTH Aachen</p>
+    <h1 class="hero-tagline">Robots <span class="brk-sm"></span>that learn<br><em>for the real world.</em></h1>
+    <p class="hero-sub">Perceive, reason and act &mdash; over long horizons.</p>
+  </div>
+
+  <div class="hero-scroll" aria-hidden="true">
+    <span class="scroll-label">Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ── Mission ───────────────────────────────────── -->
+<section class="section">
+  <div class="container">
+    <div class="mission-grid">
+      <div class="reveal">
+        <p class="section-label">What we do</p>
+        <p class="mission-statement">
+          We develop <em>generalist robots</em> that autonomously solve
+          real-world long-horizon tasks.
+        </p>
+      </div>
+      <div class="mission-meta reveal reveal-delay-1">
+        <p class="mission-body">
+          The Physical AI Lab is a young and growing research group at the Chair of
+          Imaging and Computer Vision, RWTH Aachen University. We build learning-based
+          robotic systems that perceive, reason and act in complex environments &mdash;
+          combining vision, language and control into agents that carry a task through
+          to completion rather than executing a single isolated skill.
+        </p>
+        <p class="mission-body">
+          Our work spans method development, large-scale training, and evaluation both
+          in simulation and on physical robots operating in real-world scenarios.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Research pillars ───────────────────────────── -->
+<section class="section section-flush-top">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="section-label">Research</p>
+      <a href="{{ "/research/" | relative_url }}" class="pillar-link">All research</a>
+    </div>
+
+    <div class="pillars-grid reveal reveal-delay-1">
+      {% assign topics = site.research | sort: "order" %}
+      {% for topic in topics %}
+        <a class="pillar" href="{{ topic.url | relative_url }}">
+          <img class="pillar-bg"
+               src="{{ topic.image | relative_url }}"
+               alt="" aria-hidden="true" loading="lazy">
+          <span class="pillar-veil" aria-hidden="true"></span>
+          <span class="pillar-content">
+            <span class="pillar-title">{{ topic.title }}</span>
+            <span class="pillar-desc">{{ topic.summary }}</span>
+          </span>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ── What the lab offers (dark) ─────────────────── -->
+<section class="section section-dark">
+  <div class="container">
+    <p class="section-label reveal">The lab</p>
+    <div class="highlights-grid reveal reveal-delay-1">
+
+      <div class="highlight-card">
+        <span class="highlight-tag">Facility</span>
+        <h3 class="highlight-title">NEURA Gym RWTH Aachen</h3>
+        <p class="highlight-desc">
+          A newly built laboratory where robots operate in real-world scenarios,
+          giving the group a testbed for autonomy well beyond simulation.
+        </p>
+      </div>
+
+      <div class="highlight-card">
+        <span class="highlight-tag">Network</span>
+        <h3 class="highlight-title">Academic &amp; industry partners</h3>
+        <p class="highlight-desc">
+          Active collaborations that connect our research to real deployment settings
+          and to the wider robot learning community.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ────────────────────────────────────────── -->
+<section class="cta-section">
+  <div class="container">
+    <p class="cta-label reveal">Join the lab</p>
+    <h2 class="cta-heading reveal reveal-delay-1">
+      We are hiring.<br><em>PhD / HiWi / Thesis</em>
+    </h2>
+    <p class="cta-sub reveal reveal-delay-1">
+      Shape a young and growing group working on Physical AI and robot learning.
+      Applications are reviewed on a rolling basis.
+    </p>
+    <a href="{{ "/join/" | relative_url }}" class="btn btn-primary reveal reveal-delay-2">
+      Open Positions
+    </a>
+  </div>
+</section>

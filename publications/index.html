@@ -1,0 +1,53 @@
+---
+layout: default
+title: Publications
+dark_header: true
+description: "Publications from the Physical AI Lab."
+---
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <p class="page-kicker">Physical AI Lab</p>
+    <h1 class="page-title">Publications</h1>
+    <p class="page-desc">{{ page.description }}</p>
+  </div>
+</div>
+
+<div class="content-page">
+  <div class="content-section">
+
+    {% assign pubs = site.data.publications %}
+
+    {% if pubs and pubs.size > 0 %}
+      {% assign years = pubs | map: "year" | uniq %}
+
+      <div class="pub-toolbar reveal">
+        <p class="section-label">{{ pubs.size }} publication{% if pubs.size != 1 %}s{% endif %}</p>
+        <div class="pub-years">
+          {% for y in years %}
+            <a href="#year-{{ y }}" class="pub-year-chip">{{ y }}</a>
+          {% endfor %}
+        </div>
+      </div>
+
+      {% for y in years %}
+        {% assign in_year = pubs | where: "year", y %}
+        <section class="pub-year-group reveal" id="year-{{ y }}">
+          <h2 class="pub-year-heading">{{ y }}</h2>
+          <div class="pub-list">
+            {% for pub in in_year %}
+              {% include publication.html pub=pub %}
+            {% endfor %}
+          </div>
+        </section>
+      {% endfor %}
+
+    {% else %}
+      <p class="empty-note">
+        Publication list coming soon. In the meantime, please get in touch at
+        <a href="mailto:{{ site.email }}">{{ site.email }}</a>.
+      </p>
+    {% endif %}
+
+  </div>
+</div>
