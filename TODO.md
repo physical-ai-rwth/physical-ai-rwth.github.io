@@ -73,16 +73,17 @@ Two things to verify:
 - **The machines list** covers only what the JD confirms (NEURA Gym, ~120 GPUs). Add your
   actual robot platforms with real model names and specs.
 
-### 1.5 Fill in the CVs and profile links
+### 1.5 Finish the CVs and profile links
 
-Both real members have the structure in place but **bracketed placeholders** for anything
-the JD does not confirm — `[Year]`, `[Institution]`, and profile URLs containing `[ID]`
-or `[handle]`.
+The tabular CVs are now filled from the institute pages
+(`lfb.rwth-aachen.de/en/institute/team/{schulz,wu}/`), so the appointments and degrees
+are real. Two gaps remain:
 
-- `cv:` — the short tabular CV shown on the page. This is what most visitors read.
-- `links:` — Google Scholar, LinkedIn and so on. Entirely optional; delete what you
-  do not want.
-- `assets/cv/*.pdf` — generated placeholders stamped PLACEHOLDER. Replace, or delete
+- **Neither doctorate is listed.** Both of you hold a Dr.-Ing., but neither institute page
+  states the year, so no row was invented. Add one to `cv:` in each file.
+- **Profile URLs are still placeholders** — `links:` in both files contains `[ID]` and
+  `[handle]`. Replace or delete; they are entirely optional.
+- `assets/cv/*.pdf` are generated placeholders stamped PLACEHOLDER. Replace, or delete
   them and drop `cv_pdf:` to rely on the tabular CV alone.
 
 ### 1.6 Review the HiWi and Thesis position pages

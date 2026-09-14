@@ -317,7 +317,8 @@
 
 .cv-row {
   display: grid;
-  grid-template-columns: 142px 1fr;
+  // Wide enough for a month range such as "Dec 2025 – Aug 2026" (155px measured)
+  grid-template-columns: 168px 1fr;
   gap: 1rem;
   padding: 0.7rem 0;
   border-top: 1px solid $border;
