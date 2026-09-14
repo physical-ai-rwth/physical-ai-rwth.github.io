@@ -46,12 +46,21 @@ it before you publicise the site:
 
 | What | Where | Currently |
 |---|---|---|
-| Team portraits | `_members/*.md` → `image:` | gray silhouette SVG |
+| Team portraits | `_members/*.md` → `image:` | gray silhouette SVG — except Prof. Schulz |
 | Machine photos | `neura-gym.md`, `gpu-cluster.md` | generic robot-arm SVG |
 | Research cards | `_research/*.md` → `image:` | generated abstract art |
 
 **For people and machines there is a tool** — see *Making portraits* below. It crops to
 4:3 with the subject centred on a gray gradient, so a set of photos looks consistent.
+
+**Two portrait sources are inadequate:**
+
+- **Prof. Schulz's photo is a 200x200 web thumbnail.** It is in place, but keeps its
+  original blue backdrop: keying that out of so small a JPEG leaves visible artefacts
+  around the head. Ask the institute or the photographer for the full-resolution
+  original, then re-run the tool without `--keep-bg` to get the gray treatment.
+- **There is no portrait of Yuli Wu.** The file in `~/Downloads/DrYuliWu.jpg` is a
+  screenshot of the institute contact page, not a photograph.
 
 Also set **`image_alt:`** — the image revealed on hover. Make it visibly different (in
 action, a different angle, or an animated GIF). Without it the card just zooms.

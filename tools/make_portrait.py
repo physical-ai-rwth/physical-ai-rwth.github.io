@@ -118,8 +118,11 @@ def plan(shape, face, out_w, out_h, face_frac, face_y):
     else:
         x, y, fw, fh = face
         scale = (face_frac * out_h) / fh
-        # never upscale so far that the source falls apart
-        scale = min(scale, 4.0)
+        # Never below cover: a tightly framed headshot wants a smaller scale
+        # than the frame needs, and letterboxing it leaves the subject floating
+        # in a box with its original background still attached.
+        scale = max(scale, max(out_w / W, out_h / H))
+        scale = min(scale, 6.0)
         fx, fy = (x + fw / 2) * scale, (y + fh / 2) * scale
 
     new_w, new_h = max(1, int(round(W * scale))), max(1, int(round(H * scale)))
@@ -246,6 +249,11 @@ def process(src, dst, out_w, out_h, face_frac, face_y, keep_bg, quality,
     ref = frames[0]
     face = detect_face(ref)
     scale, ox, oy, new_face = plan(ref.shape, face, out_w, out_h, face_frac, face_y)
+    if scale > 1.6:
+        sh, sw = ref.shape[:2]
+        print(f"    source is {sw}x{sh}; filling {out_w}x{out_h} needs {scale:.1f}x "
+              f"upscaling and will look soft. Use a larger original, or --width "
+              f"{int(out_w / scale * 1.6 // 10 * 10)}.", file=sys.stderr)
 
     ref_placed, valid = apply_plan(ref, scale, ox, oy, out_w, out_h)
     cx = None if new_face is None else new_face[0] + new_face[2] / 2

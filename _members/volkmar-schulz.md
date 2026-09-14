@@ -47,7 +47,7 @@ links:
     url: "https://scholar.google.com/citations?user=[ID]"
   - key: orcid
     url: "https://orcid.org/[ID]"
-image: "/assets/images/team/placeholder-person.svg"
+image: "/assets/images/team/volkmar-schulz.jpg"
 image_alt: ""
 ---
 
