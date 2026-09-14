@@ -35,6 +35,9 @@ dark_header: true
       {% if all_types contains "associate" %}
         <button class="filter-btn" data-filter="associate" role="tab">Associates</button>
       {% endif %}
+      {% if all_types contains "student" %}
+        <button class="filter-btn" data-filter="student" role="tab">Students</button>
+      {% endif %}
       {% if all_types contains "robot" %}
         <button class="filter-btn" data-filter="robot" role="tab">Robots</button>
       {% endif %}
@@ -61,13 +64,6 @@ dark_header: true
                    loading="lazy">
             {% endif %}
 
-            <span class="card-type-badge">
-              {% if person.type == "leader" %}Group Leader
-              {% elsif person.type == "head" %}Institute Head
-              {% elsif person.type == "robot" %}Robot
-              {% elsif person.type == "associate" %}Associate
-              {% else %}Member{% endif %}
-            </span>
 
             {% if person.type == "robot" %}
               <div class="card-specs">

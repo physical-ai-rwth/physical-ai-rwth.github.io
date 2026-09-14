@@ -280,7 +280,8 @@
   &.tag-leader { border-color: $accent; color: $accent; background: $accent-alpha; }
   &.tag-head   { border-color: #7C3AED; color: #7C3AED; background: rgba(124,58,237,0.08); }
   &.tag-member { }
-  &.tag-associate { }
+  &.tag-associate { border-color: #B45309; color: #B45309; background: rgba(180,83,9,0.08); }
+  &.tag-student   { border-color: #0F766E; color: #0F766E; background: rgba(15,118,110,0.08); }
   &.tag-robot  { border-color: #059669; color: #059669; background: rgba(5,150,105,0.08); }
 }
 
