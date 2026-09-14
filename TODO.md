@@ -322,9 +322,38 @@ author ids found (use these as `author_id:` in _members/*.md):
 
 Put an id in a member's `author_id:` and their page lists every matching paper, newest
 first, with their own name in bold. Add a paper once and it appears on every co-author's
-page and on `/publications/`. Set `show_publications: false` to suppress the section.
+page and on `/publications/`.
 
 Initials and other variants the converter cannot guess go in `_data/author_aliases.yml`.
+
+### Publication lists are currently switched off
+
+Per-member publication sections are disabled site-wide. The machinery is untouched — the
+matching, the highlighting, the BibTeX toggle all still work; the sections simply do not
+render. This is a single default in `_config.yml`:
+
+```yaml
+defaults:
+  - scope:
+      type: members
+    values:
+      layout: member
+      show_publications: false     # <- delete this line to re-enable for everyone
+```
+
+Three ways to bring them back:
+
+| Want | Do |
+|---|---|
+| Everyone | Delete the `show_publications: false` line above |
+| One person only | Add `show_publications: true` to that member's front matter — it overrides the default |
+| Everyone except one | Delete the default, then add `show_publications: false` to the exception |
+
+A member also needs `author_id:` set and at least one matching paper in the bibliography,
+or nothing renders regardless.
+
+Note the standalone `/publications/` page is **not** affected by this — it lists the whole
+bibliography and is controlled separately (it is hidden from the nav, see below).
 
 ### What the converter handles
 

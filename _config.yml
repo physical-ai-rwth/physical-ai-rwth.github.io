@@ -50,6 +50,10 @@ defaults:
       type: members
     values:
       layout: member
+      # Publication lists are off for now. The machinery is untouched: set
+      # show_publications: true on a member, or flip this default, to bring
+      # them back. See TODO.md.
+      show_publications: false
   - scope:
       type: research
     values:

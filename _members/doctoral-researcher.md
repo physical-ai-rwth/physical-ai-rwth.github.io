@@ -6,7 +6,7 @@ type: member
 display_types: [member]
 role: "Doctoral Researcher"
 affiliation: "Physical AI Lab, RWTH Aachen University"
-bio: "Placeholder entry — replace with a real team member."
+bio: "Placeholder — replace with a real member."
 research:
   - Robot Learning
 email: ""

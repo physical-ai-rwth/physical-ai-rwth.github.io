@@ -6,11 +6,7 @@ type: lead
 display_types: [lead, member]
 role: "Group Leader — Physical AI Lab"
 affiliation: "Chair of Imaging and Computer Vision, RWTH Aachen University"
-bio: "Leads the Physical AI Lab, building generalist robots that autonomously solve real-world long-horizon tasks through learned perception, reasoning and control."
-research:
-  - Vision-Language-Action
-  - Robot Learning
-  - World Models
+bio: "Generalist robots for real-world long-horizon tasks."
 email: "robot@lfb.rwth-aachen.de"
 author_id: "yuli-wu"
 cv_pdf: "/assets/cv/yuli-wu.pdf"

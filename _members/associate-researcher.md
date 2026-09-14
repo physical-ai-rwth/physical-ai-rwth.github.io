@@ -6,7 +6,7 @@ type: associate
 display_types: [associate]
 role: "Doctoral Researcher"
 affiliation: "RWTH Aachen University"
-bio: "Placeholder entry — an associate works with the group but is supervised elsewhere."
+bio: "Works with the group, supervised elsewhere."
 research:
   - Robot Learning
 email: ""

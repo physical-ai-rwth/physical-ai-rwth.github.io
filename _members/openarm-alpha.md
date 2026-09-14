@@ -5,7 +5,7 @@ order: 10
 type: robot
 display_types: [robot]
 role: "Bimanual Manipulator"
-description: "Open-source bimanual arm built for physical AI research in contact-rich settings. Compliant, backdrivable joints make it safe to work alongside and well suited to learning from physical interaction."
+description: "Open-source bimanual arm with backdrivable joints."
 specs:
   - label: "Unit"
     value: "Alpha"

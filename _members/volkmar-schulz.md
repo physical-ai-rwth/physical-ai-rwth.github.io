@@ -6,12 +6,7 @@ type: head
 display_types: [head, member]
 role: "Head of Institute"
 affiliation: "Chair of Imaging and Computer Vision, RWTH Aachen University"
-bio: "W3 Professor for Imaging and Computer Vision at RWTH Aachen, working on medical imaging technologies including PET/MRI systems, image reconstruction and magnetic particle imaging."
-research:
-  - Medical Imaging
-  - PET / MRI
-  - Image Reconstruction
-  - Magnetic Particle Imaging
+bio: "Medical imaging, PET/MRI and image reconstruction."
 email: ""
 author_id: "volkmar-schulz"
 cv_pdf: "/assets/cv/volkmar-schulz.pdf"

@@ -5,7 +5,7 @@ order: 13
 type: robot
 display_types: [robot]
 role: "Quadruped"
-description: "A four-legged platform for locomotion and mobile manipulation research, able to carry perception payloads into spaces a fixed arm cannot reach."
+description: "Quadruped for locomotion and mobile manipulation."
 specs:
   - label: "Type"
     value: "Quadruped"

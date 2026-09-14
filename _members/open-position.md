@@ -6,7 +6,7 @@ type: member
 display_types: [member]
 role: "Open Position"
 affiliation: "Physical AI Lab, RWTH Aachen University"
-bio: "We are recruiting doctoral researchers in Physical AI and robot learning. Applications are reviewed on a rolling basis."
+bio: "We are recruiting doctoral researchers."
 research:
   - Open Call
 email: "robot@lfb.rwth-aachen.de"
