@@ -51,7 +51,7 @@ image: "/assets/images/team/volkmar-schulz.jpg"
 image_alt: ""
 ---
 
-Professor Schulz heads the Chair of Imaging and Computer Vision within the Faculty of
+Professor Schulz heads the [Chair of Imaging and Computer Vision](https://www.lfb.rwth-aachen.de/en/) within the Faculty of
 Electrical Engineering and Information Technology at RWTH Aachen University. He oversees the
 Physical AI Lab, which operates as a research group within the chair.
 

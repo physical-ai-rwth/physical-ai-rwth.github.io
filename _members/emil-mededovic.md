@@ -4,7 +4,7 @@ short_name: "Emil Mededovic"
 order: 5
 type: associate
 display_types: [associate]
-role: "Chief Innovation Office"
+role: "Chief Innovation Officer"
 affiliation: "Chair of Imaging and Computer Vision, RWTH Aachen University"
 quote: ""
 research:

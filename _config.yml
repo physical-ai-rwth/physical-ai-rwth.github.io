@@ -8,6 +8,7 @@ baseurl: ""
 email: robot@lfb.rwth-aachen.de
 
 institute: Chair of Imaging and Computer Vision
+institute_url: "https://www.lfb.rwth-aachen.de/en/"
 faculty: Faculty of Electrical Engineering and Information Technology
 university: RWTH Aachen University
 address: Kopernikusstr. 16, 52074 Aachen, Germany

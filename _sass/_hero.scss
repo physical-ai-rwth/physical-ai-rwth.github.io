@@ -85,7 +85,10 @@
   letter-spacing: 0.25em;
   text-transform: uppercase;
   color: rgba($text-light, 0.6);
-  margin-bottom: 1.25rem;
+  // The gap down to the tagline, fluid like the type around it. A flat 20px
+  // read as a line break on a phone but as a hairline under a 132px headline
+  // on a large display, so it grows with the viewport.
+  margin-bottom: clamp(24px, 1.5vw + 18px, 44px);
 }
 
 .hero-tagline {

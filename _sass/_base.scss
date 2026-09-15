@@ -19,6 +19,17 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
+  // Every ligature feature the fonts actually carry. Inherited, but in practice
+  // this is Vollkorn-only: it is the sole face here with dlig/hlig (Roboto has
+  // just liga, Roboto Mono none at all, so the extra keywords are inert there).
+  //   liga  standard   ff fi fl ffi ffl ft fj        already on by default
+  //   clig  contextual not present in Vollkorn
+  //   dlig  discretionary  Th ch ct st fb fh fk      the visible change
+  //   hlig  historical only substitutes sequences starting with the long s
+  //         (U+017F); it never turns a normal "s" into one, so with no ſ in
+  //         any copy it is a no-op rather than the usual archaic-text hazard.
+  font-variant-ligatures: common-ligatures contextual discretionary-ligatures historical-ligatures;
+
   // Sticky footer. A page whose content is shorter than the viewport, such as
   // Join Us once its cards sit three-across on a wide screen, would otherwise
   // leave the footer floating with body background beneath it. This keeps the

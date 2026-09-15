@@ -22,4 +22,5 @@ initiative:
   summary: "No HiWi roles are advertised at the moment. Send a short note on what interests you, together with your CV and transcripts."
   contact: "Dr.-Ing. Yuli Wu"
   email: "yuli.wu@lfb.rwth-aachen.de"
+  profile: "/team/yuli-wu/"
 ---

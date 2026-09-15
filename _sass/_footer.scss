@@ -69,6 +69,20 @@
   letter-spacing: 0.08em;
   color: rgba($text-light, 0.25);
   margin-top: auto;
+
+  // The address block is deliberately faint, so the link inherits that rather
+  // than shouting in accent blue. It brightens on hover to show it is live.
+  a {
+    color: inherit;
+    text-decoration: none;
+    text-underline-offset: 3px;
+    transition: color $t;
+
+    &:hover {
+      color: rgba($text-light, 0.6);
+      text-decoration: underline;
+    }
+  }
 }
 
 .footer-col-title {

@@ -280,7 +280,10 @@
   flex-direction: column;
   gap: 0.75rem;
 
-  &:hover .highlight-title { color: $accent-light; }
+  // Only a title that is actually a link responds to hover. The other card
+  // has no link, and colouring it on hover implied a click target that is not
+  // there.
+  &:hover .highlight-title a { color: $accent-light; }
 }
 
 .highlight-date {
@@ -306,6 +309,15 @@
   line-height: 1.3;
   color: $text-light;
   transition: color $t;
+
+  a {
+    color: inherit;
+    text-decoration: none;
+    text-underline-offset: 3px;
+    transition: color $t;
+
+    &:hover { text-decoration: underline; }
+  }
 }
 
 .highlight-desc {

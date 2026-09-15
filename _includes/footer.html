@@ -9,7 +9,11 @@
         <p class="footer-tagline">{{ site.tagline }}</p>
         <p class="footer-affil">
           {{ site.title }}<br>
-          {{ site.institute }}<br>
+          {%- if site.institute_url and site.institute_url != "" -%}
+            <a href="{{ site.institute_url }}" target="_blank" rel="noopener">{{ site.institute }}</a><br>
+          {%- else -%}
+            {{ site.institute }}<br>
+          {%- endif -%}
           {{ site.university }}<br>
           {{ site.address }}
         </p>

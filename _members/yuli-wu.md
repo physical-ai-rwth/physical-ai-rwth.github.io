@@ -45,7 +45,7 @@ image: "/assets/images/team/yuli-wu.jpg"
 image_alt: ""
 ---
 
-Yuli Wu leads the Physical AI Lab at the Chair of Imaging and Computer Vision, RWTH Aachen
+Yuli Wu leads the Physical AI Lab at the [Chair of Imaging and Computer Vision](https://www.lfb.rwth-aachen.de/en/), RWTH Aachen
 University. The group develops generalist robots that autonomously solve real-world,
 long-horizon tasks.
 
