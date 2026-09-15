@@ -10,7 +10,7 @@ quote:
 research:
   - Robot Learning
 email: "marian.frei@lfb.rwth-aachen.de"
-image: "/assets/images/team/placeholder-person.svg"
+image: "/assets/images/team/marian-frei.jpg"
 image_alt: ""
 # author_id: "firstname-lastname"   # links their papers from the bibliography
 ---

@@ -27,7 +27,7 @@ cv:
   - period: "Oct 2015 – Sep 2018"
     title: "B.Sc. Electrical Engineering, Information Technology and Computer Engineering"
     org: "RWTH Aachen University"
-image: "/assets/images/team/placeholder-person.svg"
+image: "/assets/images/team/emil-mededovic.jpg"
 image_alt: ""
 ---
 
