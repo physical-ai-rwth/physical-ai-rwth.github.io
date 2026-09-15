@@ -82,6 +82,10 @@ navigation:
     url: /join/
 
 exclude:
+  # Internal working documents. These were being served on the public domain:
+  # TODO.md in particular is the working checklist, not lab-facing content.
+  - TODO.md
+  - "**/README.md"
   - raw-photos/
   - tools/
   - Gemfile
