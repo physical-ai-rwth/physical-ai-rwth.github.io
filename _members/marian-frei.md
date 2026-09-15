@@ -1,19 +1,18 @@
 ---
-name: "[Doctoral Researcher]"
-short_name: "[Doctoral Researcher]"
+name: "Marian Frei, M.Sc."
+short_name: "Marian Frei"
 order: 3
 type: member
 display_types: [member]
 role: "Doctoral Researcher"
 affiliation: "Physical AI Lab, RWTH Aachen University"
-quote: "[Quote from this member]"
+quote: 
 research:
   - Robot Learning
-email: ""
+email: "marian.frei@lfb.rwth-aachen.de"
 image: "/assets/images/team/placeholder-person.svg"
 image_alt: ""
 # author_id: "firstname-lastname"   # links their papers from the bibliography
 ---
 
-Placeholder. Replace the front matter and this text with the real person's
-details — see `TODO.md` for the full list of supported fields.
+Placeholder. 

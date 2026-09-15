@@ -81,13 +81,18 @@
   filterBtns.forEach(function (btn) {
     btn.addEventListener('click', function () {
       const filter = btn.dataset.filter;
+      // A tab may cover several types, e.g. "member,associate" — match any of
+      // them, so tabs can be grouped without touching each person's tags.
+      const wanted = filter.split(',');
 
       filterBtns.forEach(function (b) { b.classList.remove('active'); });
       btn.classList.add('active');
 
       memberCards.forEach(function (card) {
         const types = (card.dataset.types || '').split(',');
-        const show = filter === 'all' || types.includes(filter);
+        const show = filter === 'all' || wanted.some(function (w) {
+          return types.includes(w);
+        });
         card.style.display = show ? '' : 'none';
       });
     });

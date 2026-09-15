@@ -7,12 +7,11 @@ topics:
   - "Medical Robotics"
   - "Imaging"
   - "Safety"
-# Publications are optional. List BibTeX keys explicitly, and/or match on
-# the `keywords` field of entries in _bibliography/papers.bib.
+# Publications are optional and deliberately empty for now. To list real ones:
+# add BibTeX keys to pub_keys, and/or keywords matching the `keywords` field of
+# entries in _bibliography/papers.bib. Both empty renders no section at all.
 pub_keys: []
-pub_keywords:
-  - "medical"
-  - "medical-robotics"
+pub_keywords: []
 ---
 
 Working within a chair with deep expertise in imaging and medical technology, we explore

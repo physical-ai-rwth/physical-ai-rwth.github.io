@@ -7,12 +7,11 @@ topics:
   - "World Models"
   - "Predictive Modelling"
   - "Model-Based Planning"
-# Publications are optional. List BibTeX keys explicitly, and/or match on
-# the `keywords` field of entries in _bibliography/papers.bib.
+# Publications are optional and deliberately empty for now. To list real ones:
+# add BibTeX keys to pub_keys, and/or keywords matching the `keywords` field of
+# entries in _bibliography/papers.bib. Both empty renders no section at all.
 pub_keys: []
-pub_keywords:
-  - "world-models"
-  - "dynamics"
+pub_keywords: []
 ---
 
 Robots that act over long horizons need some model of how the world responds to what

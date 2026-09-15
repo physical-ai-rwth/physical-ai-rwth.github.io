@@ -153,9 +153,13 @@
   right: $gutter;
   bottom: 1.25rem;
   z-index: 3;
-  font-family: $font-mono;
+  font-family: $font-sans;
+  // Roboto ships a real italic cut, so this is not a synthesised slant
+  font-style: italic;
   font-size: 10px;            // an attribution, deliberately unobtrusive
-  letter-spacing: 0.06em;
+  // The 0.06em tracking here was loosening monospace; proportional italic
+  // does not need it, and at 10px it only pulls the words apart.
+  letter-spacing: 0.01em;
   color: rgba($text-light, 0.42);
   text-align: right;
   max-width: 46vw;

@@ -470,7 +470,7 @@ title: "PostDoc"
 kicker: "Postdoctoral"
 order: 4
 summary: "One sentence — shown on the card."
-facts:                                   # the "At a glance" table
+facts:                                   # the sidebar table; renders unlabelled
   - label: "Type"
     value: "Full-time"
 pdf: "/assets/jd/PostDoc_JD.pdf"         # optional; button hidden if file missing

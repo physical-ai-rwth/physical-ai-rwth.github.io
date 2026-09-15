@@ -18,7 +18,17 @@ body {
   background: $bg;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  // Sticky footer. A page whose content is shorter than the viewport, such as
+  // Join Us once its cards sit three-across on a wide screen, would otherwise
+  // leave the footer floating with body background beneath it. This keeps the
+  // footer on the bottom edge instead of padding the content out to reach it.
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
+
+main { flex: 1 0 auto; }
 
 img, video {
   max-width: 100%;

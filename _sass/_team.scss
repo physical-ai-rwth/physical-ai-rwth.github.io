@@ -5,6 +5,14 @@
   color: $text-light;
 }
 
+// A header with no description carries only a kicker and a title, so the full
+// 64px above and below leaves the band looking mostly empty. Join Us is the
+// only such page today. Note this outranks the plain .page-header rule in the
+// $sm block below, so that block carries its own no-description variant.
+.page-header:not(:has(.page-desc)) {
+  padding: calc(#{$nav-height} + 32px) 0 36px;
+}
+
 .page-header-inner {
   max-width: $max-width;
   margin: 0 auto;
@@ -303,6 +311,7 @@
 
 @media (max-width: $sm) {
   .page-header { padding: calc(#{$nav-height} + 40px) 0 40px; }
+  .page-header:not(:has(.page-desc)) { padding: calc(#{$nav-height} + 24px) 0 28px; }
   .filter-btn  { padding: 13px 15px; }   // keeps a 44px tap target
   .card-info   { padding: 0.85rem 0.85rem 1rem; }
   .card-specs  { padding: 1.1rem; }

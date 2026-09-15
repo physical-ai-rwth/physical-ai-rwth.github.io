@@ -29,11 +29,13 @@ dark_header: true
 
     <div class="team-filters" role="tablist">
       <button class="filter-btn active" data-filter="all" role="tab">All</button>
-      {% if all_types contains "member" %}
-        <button class="filter-btn" data-filter="member" role="tab">Members</button>
-      {% endif %}
-      {% if all_types contains "associate" %}
-        <button class="filter-btn" data-filter="associate" role="tab">Associates</button>
+      {%- comment -%}
+        Members and associates share one tab. data-filter takes a comma-separated
+        list and matches any of them, which keeps the filter independent of
+        display_types — so an associate's card still carries its own tag.
+      {%- endcomment -%}
+      {% if all_types contains "member" or all_types contains "associate" %}
+        <button class="filter-btn" data-filter="member,associate" role="tab">Members</button>
       {% endif %}
       {% if all_types contains "student" %}
         <button class="filter-btn" data-filter="student" role="tab">Students</button>

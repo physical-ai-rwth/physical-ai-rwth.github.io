@@ -1,7 +1,9 @@
 // Generic content pages (research, join, publications)
 .content-page {
   padding-top: $nav-height;
-  min-height: 100vh;
+  // No min-height here: it used to stop a short page stranding the footer, but
+  // it did so by inflating the content area, which on a wide viewport showed up
+  // as a large empty band under the cards. The sticky footer on body handles it.
 }
 
 .content-section {
@@ -353,6 +355,20 @@
 }
 
 // ── Openings: PhD/PostDoc, HiWi, Thesis ───────────
+// The Join index sits under a .page-header that has already cleared the nav, so
+// .content-page's nav-height padding doubles up with .content-section's own.
+// Tightened to the same rhythm as the position pages it links to.
+.content-page:has(.openings-grid) {
+  padding-top: 0;
+
+  > .content-section {
+    padding-top: clamp(40px, 5vw, 64px);
+    // Still lighter than the top, because the footer contributes ~61px of its
+    // own top padding directly below this.
+    padding-bottom: clamp(28px, 3.5vw, 44px);
+  }
+}
+
 .openings-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -461,6 +477,48 @@ a.opening {
 }
 
 // ── Individual position page ──────────────────────
+// .content-page and .content-section each contribute top padding, which stacks
+// to ~152px below the header band on a position page. One of them is enough,
+// and the remaining one is tightened further.
+.position-page .content-page {
+  padding-top: 0;
+  // min-height: 100vh keeps a short page from leaving the footer stranded
+  // mid-screen, but on a position page it pads the column out and reappears as
+  // dead space above the "Other openings" nav. That nav and the footer already
+  // fill the viewport here, so the guard is not needed.
+  min-height: 0;
+}
+
+// The first heading in the prose carries a top margin meant to separate it from
+// text above it. As the first thing in the column it only pushes the whole
+// column below the sidebar, which is what threw the PhD page out of alignment.
+.position-page .topic-prose > :first-child { margin-top: 0; }
+.position-page .content-section {
+  padding-top: clamp(28px, 4vw, 48px);
+  padding-bottom: clamp(28px, 4vw, 48px);
+}
+
+// The heading above the first opening, kept as one set of values because the
+// sidebar offset below is derived from them. Changing these without changing
+// that calc breaks the alignment.
+$openings-title-size: 25px;
+$openings-title-lh:   1.6;
+$openings-title-mb:   0.4rem;
+
+.openings .member-section-title {
+  font-size: $openings-title-size;
+  line-height: $openings-title-lh;
+  margin-bottom: $openings-title-mb;
+}
+
+// Line the sidebar's top rule up with the first opening's rule, which sits one
+// heading-block lower in the main column. :has() scopes this to pages that
+// actually open on the list, so the PhD page, whose main column starts with
+// prose, keeps its sidebar flush with the top.
+.position-grid:has(.position-main > .openings:first-child) .position-aside {
+  margin-top: calc(#{$openings-title-size} * #{$openings-title-lh} + #{$openings-title-mb});
+}
+
 .position-grid {
   display: grid;
   grid-template-columns: minmax(200px, 250px) 1fr;
@@ -500,6 +558,12 @@ a.opening {
 // Each advertised topic or role: summary, contact, optional PDF.
 .openings {
   margin: 2.5rem 0 2.25rem;
+
+  // These margins separate the list from prose around it. Pages with no body
+  // (thesis, hiwi) open and close on the list, where they would only stack onto
+  // the section's own padding.
+  &:first-child { margin-top: 0; }
+  &:last-child  { margin-bottom: 0; }
 }
 
 .opening-item {
@@ -513,6 +577,9 @@ a.opening {
   font-family: $font-serif;
   font-size: clamp(19px, 2vw, 23px);
   font-weight: 600;
+  // Vollkorn-SemiBoldItalic ships with the site and is registered at 600 in
+  // main.scss, so this is a real italic cut rather than a synthesised slant.
+  font-style: italic;
   line-height: 1.25;
   color: $text;
   margin-bottom: 0.5rem;
@@ -538,20 +605,31 @@ a.opening {
 }
 
 .opening-contact {
-  font-family: $font-mono;
-  font-size: $fs-ui;
-  color: $text-muted;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 3px;
+  line-height: 1.35;
 
+  // The address is a technical string, so it keeps the monospaced face and the
+  // smaller size. It sits under the name as the secondary line.
   a {
+    font-family: $font-mono;
+    font-size: $fs-label;
     color: $accent;
+    text-decoration: none;
+    text-underline-offset: 3px;
+
     &:hover { text-decoration: underline; }
   }
 }
 
+// Monospaced like the address beneath it, separated by weight instead of by
+// typeface. Roboto Mono is a variable font spanning 100-700, so 700 is a real
+// bold cut rather than a synthesised one.
 .opening-contact-name {
-  color: $text;
+  font-family: $font-mono;
+  font-size: $fs-ui;
+  font-weight: 700;
   letter-spacing: 0.04em;
+  color: $text;
 }

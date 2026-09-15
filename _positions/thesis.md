@@ -6,6 +6,8 @@ summary: "Bachelor's and master's thesis projects across the group's research ar
 facts:
   - label: "Type"
     value: "Bachelor / Master"
+  - label: "For"
+    value: "Enrolled students"
   - label: "Start"
     value: "Rolling"
 # pdf: "/assets/jd/Thesis_Topics.pdf"   # page-level PDF, separate from the per-topic ones
@@ -18,22 +20,29 @@ apply_subject: ""
 # One block per advertised topic. `summary`, `contact`, `email` and `pdf` are all
 # optional: `email` falls back to site.email, and the PDF button appears only once
 # a file actually exists at that path, so listing one ahead of time is harmless.
+# The three topics from Thesis_MF_11-09-2026.pdf. All three share that one PDF,
+# which describes the set; per-topic one-page descriptions exist on request.
 openings_title: "Open topics"
 openings:
-  - title: "[Thesis topic title]"
-    summary: "[One or two sentences on the question and what the student would build.]"
-    contact: "Yuli Wu"
-    email: "yuli.wu@lfb.rwth-aachen.de"
-    pdf: "/assets/jd/PhD_JD_PAI_03-09-r2.pdf"   # PLACEHOLDER: the PhD JD, pending a real one
-  - title: "[Thesis topic title]"
-    summary: "[One or two sentences on the question and what the student would build.]"
-    contact: "Yuli Wu"
-    email: "yuli.wu@lfb.rwth-aachen.de"
-    pdf: "/assets/jd/PhD_JD_PAI_03-09-r2.pdf"   # PLACEHOLDER: the PhD JD, pending a real one
+  - title: "Scaling Laws for Robot Data: Predicting Success Before Training"
+    summary: "Scaling laws made language models predictable; robot learning has no such law yet, and how demonstration quality enters is open. Build automated evaluation trustworthy enough to see a law at all, then measure how success grows with data quantity, quality and coverage."
+    contact: "Marian Frei, M.Sc."
+    email: "marian.frei@lfb.rwth-aachen.de"
+    pdf: "/assets/jd/Thesis_MF_11-09-2026.pdf"
+  - title: "From Crumpled to Folded, and Fast: Vision Language Action Policies"
+    summary: "Folding is reliable from a flat shirt and degrades sharply once it starts crumpled, and even then the setup needs 40 seconds where a human needs 10. Work both axes, recovery from hard initial states and action representations that rescale in time, then measure where success breaks."
+    contact: "Marian Frei, M.Sc."
+    email: "marian.frei@lfb.rwth-aachen.de"
+    pdf: "/assets/jd/Thesis_MF_11-09-2026.pdf"
+  - title: "Language Models as Robot Operators"
+    summary: "A language model has never seen our hardware, yet with the right tools it can read a scene, plan a fold and explain why a grasp failed, which makes the scaffold around the model the real research object. Design that scaffold, compare frontier against local models on success rates, then turn the agent into a source of demonstrations."
+    contact: "Marian Frei, M.Sc."
+    email: "marian.frei@lfb.rwth-aachen.de"
+    pdf: "/assets/jd/Thesis_MF_11-09-2026.pdf"
 
 initiative:
   title: "Initiative application"
-  summary: "Nothing above a match? Send a short note on what you would like to work on, together with your CV and transcript. Topics are often shaped around a student's own interests rather than picked from a fixed list."
-  contact: "Yuli Wu"
+  summary: "If none of these fits exactly, send a short message saying which direction draws you and why, along with your CV and transcript."
+  contact: "Dr.-Ing. Yuli Wu"
   email: "yuli.wu@lfb.rwth-aachen.de"
 ---

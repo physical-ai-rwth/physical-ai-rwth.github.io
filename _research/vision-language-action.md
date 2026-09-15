@@ -8,12 +8,11 @@ topics:
   - "Multimodal Learning"
   - "Diffusion Models"
   - "Instruction Following"
-# Publications are optional. List BibTeX keys explicitly, and/or match on
-# the `keywords` field of entries in _bibliography/papers.bib.
+# Publications are optional and deliberately empty for now. To list real ones:
+# add BibTeX keys to pub_keys, and/or keywords matching the `keywords` field of
+# entries in _bibliography/papers.bib. Both empty renders no section at all.
 pub_keys: []
-pub_keywords:
-  - "vla"
-  - "vision-language-action"
+pub_keywords: []
 ---
 
 We build models that connect perception and language directly to action, so that a

@@ -7,12 +7,11 @@ topics:
   - "Active Perception"
   - "Embodied Vision"
   - "Uncertainty"
-# Publications are optional. List BibTeX keys explicitly, and/or match on
-# the `keywords` field of entries in _bibliography/papers.bib.
+# Publications are optional and deliberately empty for now. To list real ones:
+# add BibTeX keys to pub_keys, and/or keywords matching the `keywords` field of
+# entries in _bibliography/papers.bib. Both empty renders no section at all.
 pub_keys: []
-pub_keywords:
-  - "active-perception"
-  - "perception"
+pub_keywords: []
 ---
 
 Perception is not passive. We study how robots should move sensors and bodies to gather

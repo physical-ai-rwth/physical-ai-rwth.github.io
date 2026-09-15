@@ -9,3 +9,9 @@ node_modules/
 # Font masters (OTF/TTF/WOFF, ~16 MB). The site only serves the woff2 files in
 # assets/fonts/, which are committed. Re-downloadable: Vollkorn is OFL-licensed.
 vollkorn-4-105/
+
+# Video masters (.mov/.mp4 straight off the camera, often hundreds of MB). Only the
+# encoded assets/video/hero.mp4 is committed. GitHub rejects files over 100 MB and
+# caps a Pages site at 1 GB, so masters must stay out of the repository.
+raw-video/*
+!raw-video/README.md
