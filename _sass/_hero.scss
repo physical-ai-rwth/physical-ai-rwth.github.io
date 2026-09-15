@@ -164,7 +164,9 @@
   font-family: $font-sans;
   // Roboto ships a real italic cut, so this is not a synthesised slant
   font-style: italic;
-  font-size: 10px;            // an attribution, deliberately unobtrusive
+  // Still an attribution rather than a caption, but fluid like the rest of the
+  // hero type so it does not shrink away under a 132px headline.
+  font-size: clamp(11px, 0.25vw + 10.1px, 14px);
   // The 0.06em tracking here was loosening monospace; proportional italic
   // does not need it, and at 10px it only pulls the words apart.
   letter-spacing: 0.01em;
@@ -178,7 +180,6 @@
     // cue and is far too short to reach the middle, so the two never collide
     // without needing to centre this.
     bottom: 0.6rem;
-    font-size: 9px;
   }
 }
 
