@@ -12,7 +12,7 @@ research:
 
 email: "thore.meyer@lfb.rwth-aachen.de"
 
-image: "/assets/images/team/placeholder-person.svg"
+image: "/assets/images/team/thore-meyer.jpg"
 image_alt: ""
 ---
 

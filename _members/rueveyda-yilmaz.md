@@ -21,7 +21,7 @@ cv:
   - period: "Sep 2015 – Jul 2020"
     title: "B.Sc. Electrical Engineering"
     org: "Bilkent University, Turkey"
-image: "/assets/images/team/placeholder-person.svg"
+image: "/assets/images/team/rueveyda-yilmaz.jpg"
 image_alt: ""
 ---
 
