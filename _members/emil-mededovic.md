@@ -4,9 +4,9 @@ short_name: "Emil Mededovic"
 order: 5
 type: associate
 display_types: [associate]
-role: "Doctoral Researcher"
+role: "Chief Innovation Office"
 affiliation: "Chair of Imaging and Computer Vision, RWTH Aachen University"
-quote: 
+quote: ""
 research:
   - Tracking
   - Event Camera

@@ -123,7 +123,10 @@
 
   .member-portrait-alt { opacity: 0; }
 
-  &:hover {
+  // Cross-fade only when a second image exists. Unqualified, this faded the
+  // one image out to the empty background for every member whose image_alt
+  // is "", which is all of them but the robots.
+  &[data-has-alt]:hover {
     .member-portrait-alt { opacity: 1; }
     img:not(.member-portrait-alt) { opacity: 0; }
   }

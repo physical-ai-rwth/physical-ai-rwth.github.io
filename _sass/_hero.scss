@@ -76,7 +76,11 @@
 
 .hero-title {
   font-family: $font-mono;
-  font-size: 12px;
+  // Fluid like the tagline, but over a much narrower range: an eyebrow that
+  // grew 3.5x the way the tagline does would dominate it. The slope puts the
+  // minimum at ~375px wide and the maximum at ~1920px, so it scales across the
+  // whole usable range rather than sitting pinned at one end.
+  font-size: clamp(11px, 0.39vw + 9.5px, 17px);
   font-weight: 500;
   letter-spacing: 0.25em;
   text-transform: uppercase;
@@ -107,7 +111,8 @@
 
 .hero-sub {
   font-family: $font-sans;
-  font-size: 14px;
+  // Same approach as .hero-title: min at ~375px wide, max at ~1920px.
+  font-size: clamp(13px, 0.45vw + 11.3px, 20px);
   font-weight: 400;
   letter-spacing: 0.05em;
   color: rgba($text-light, 0.5);
@@ -166,12 +171,10 @@
   pointer-events: none;
 
   @media (max-width: $sm) {
-    // Below the scroll cue on phones, centred, so the two never collide
-    right: $gutter;
-    left: $gutter;
+    // Stays in the corner at every width. It sits lower than the centred scroll
+    // cue and is far too short to reach the middle, so the two never collide
+    // without needing to centre this.
     bottom: 0.6rem;
-    max-width: none;
-    text-align: center;
     font-size: 9px;
   }
 }

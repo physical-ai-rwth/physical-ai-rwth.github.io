@@ -36,7 +36,12 @@ dark_header: true
     <div class="member-grid">
 
       <aside class="member-aside">
-        <div class="member-portrait">
+        {%- comment -%}
+          data-has-alt marks a portrait that actually has a second image, the
+          same convention the team cards use. Without it the hover rule fades
+          the only image out and leaves an empty frame.
+        {%- endcomment -%}
+        <div class="member-portrait"{% if page.image_alt and page.image_alt != "" %} data-has-alt="true"{% endif %}>
           <img src="{{ page.image | relative_url }}" alt="{{ page.name }}" loading="lazy">
           {% if page.image_alt and page.image_alt != "" %}
             <img class="member-portrait-alt"
