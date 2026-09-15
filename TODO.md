@@ -8,39 +8,29 @@ or working as intended).
 
 ## 1. Must fix
 
-### 1.1 Delete the fabricated publications
+### 1.1 Fabricated publications — DONE
 
-`_bibliography/papers.bib` contains **three invented papers** written to exercise the
-pipeline. They carry fake identifiers — `10.1109/LRA.2025.000000` and
-`arXiv:0000.00000` — and a co-author who does not exist ("Jane Doe").
+`_bibliography/papers.bib` held three invented papers with fake identifiers. They have been
+deleted and `_data/publications.yml` regenerated, so `/publications/`, the research topics
+and the member pages all render no entries.
 
-On an academic site these read as real publications. Delete all three, paste your actual
-BibTeX, and regenerate:
+To add real ones: paste your BibTeX into `_bibliography/papers.bib`, then
 
 ```bash
 python3 tools/bib2yml.py
 ```
 
-Until that is done, leaving Publications hidden from the nav (as it is now) is the safer
-state, though the page is still reachable at `/publications/` and the entries still show
-on member pages.
+Deleting from the `.bib` alone is not enough — the YAML is generated, and a stale copy will
+keep publishing entries whose source is gone.
 
-### 1.2 Replace the placeholder hero video
+### 1.2 Placeholder hero video — DONE
 
-The homepage embeds a **third-party YouTube video** about NEURA's robot gym
-(`aWLz0HYobd8`), chosen only because it matches your NEURA Gym access. Two reasons to swap
-it before you publicise the site:
+The YouTube embed is gone. The hero now plays a self-hosted file from
+`assets/video/hero.mp4`, so the homepage makes no request to Google and serves no ads.
+`hero_video.youtube_id` is empty; the embed path still works if the local file is removed.
 
-- It is someone else's content sitting on your official lab page.
-- YouTube contacts Google servers on every visit. The embed uses `youtube-nocookie.com`
-  (privacy-enhanced mode), but self-hosting avoids the GDPR question entirely — the same
-  reasoning behind self-hosting the fonts.
-
-| Option | How |
-|---|---|
-| Self-host (preferred) | Drop the file at `assets/video/hero.mp4`. It takes priority automatically — no config edit, and the "third-party footage" disclaimer disappears by itself. |
-| Different YouTube clip | Change `hero_video.youtube_id` in `_config.yml`. |
-| No video | Set `youtube_id: ""` and add no file — the ambient gradient stands on its own. |
+The footage is still third-party, credited bottom-right via `hero_video.credit`. Set that
+to `""` once it is replaced with your own.
 
 ### 1.3 Every image is a placeholder
 

@@ -6,7 +6,7 @@ type: head
 display_types: [head, member]
 role: "Head of Institute"
 affiliation: "Chair of Imaging and Computer Vision, RWTH Aachen University"
-quote: 
+quote: ""
 email: "volkmar.schulz@lfb.rwth-aachen.de"
 author_id: "volkmar-schulz"
 cv_pdf: 
