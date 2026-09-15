@@ -9,7 +9,7 @@ affiliation: "Physical AI Lab, RWTH Aachen University"
 quote: "Robot intelligence is one great path toward revealing how humans think."
 email: "yuli.wu@lfb.rwth-aachen.de"
 author_id: "yuli-wu"
-cv_pdf: "/assets/cv/yuli-wu.pdf"
+# cv_pdf: "/assets/cv/yuli-wu.pdf"   # hidden for now; uncomment to show the button
 cv:
   - period: "Aug 2026 – present"
     title: "Group Leader, Physical AI"

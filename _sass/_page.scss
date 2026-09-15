@@ -633,3 +633,16 @@ $openings-title-mb:   0.4rem;
   letter-spacing: 0.04em;
   color: $text;
 }
+
+// When the name links to a profile it must keep the name styling. The
+// `.opening-contact a` rule above would otherwise render it as the small mono
+// accent used for the address; matching the class as well as the element
+// outranks it.
+.opening-contact a.opening-contact-name {
+  font-size: $fs-ui;
+  color: $text;
+  text-decoration: none;
+  text-underline-offset: 3px;
+
+  &:hover { text-decoration: underline; }
+}

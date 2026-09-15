@@ -93,8 +93,16 @@ dark_header: true
                   <div class="opening-item-meta">
                     {% assign mail = o.email | default: site.email %}
                     <span class="opening-contact">
+                      {%- comment -%}
+                        `profile:` is optional. With it the name links to that
+                        person's page; without it the name is plain text.
+                      {%- endcomment -%}
                       {% if o.contact and o.contact != "" %}
-                        <span class="opening-contact-name">{{ o.contact }}</span>
+                        {% if o.profile and o.profile != "" %}
+                          <a class="opening-contact-name" href="{{ o.profile | relative_url }}">{{ o.contact }}</a>
+                        {% else %}
+                          <span class="opening-contact-name">{{ o.contact }}</span>
+                        {% endif %}
                       {% endif %}
                       <a href="mailto:{{ mail }}">{{ mail }}</a>
                     </span>
@@ -130,7 +138,11 @@ dark_header: true
                   {% assign i_mail = page.initiative.email | default: site.email %}
                   <span class="opening-contact">
                     {% if page.initiative.contact and page.initiative.contact != "" %}
-                      <span class="opening-contact-name">{{ page.initiative.contact }}</span>
+                      {% if page.initiative.profile and page.initiative.profile != "" %}
+                        <a class="opening-contact-name" href="{{ page.initiative.profile | relative_url }}">{{ page.initiative.contact }}</a>
+                      {% else %}
+                        <span class="opening-contact-name">{{ page.initiative.contact }}</span>
+                      {% endif %}
                     {% endif %}
                     <a href="mailto:{{ i_mail }}">{{ i_mail }}</a>
                   </span>
